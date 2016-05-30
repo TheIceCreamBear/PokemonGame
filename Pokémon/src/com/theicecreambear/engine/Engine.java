@@ -43,9 +43,8 @@ public class Engine {
 	public int x = gameWidth / 2;
 	public int y = gameHeight / 2;
 	public static BufferedImage i2;
-	private Thread soundThread;
 	
-	public SoundHandler sHandler;
+	private Thread soundThread;
 	
 	public static void main(String[] args) {
 		new Engine();
@@ -63,10 +62,7 @@ public class Engine {
 	/**
 	 * Initializes variables
 	 */
-	void initialize() {
-		// Big Objects
-//		sHandler = SoundHandler.getNewSoundHandler(null);
-		
+	void initialize() {		
 		// Window stuf
 		frame = new JFrame("Game");
 		frame.setSize(new Dimension(gameWidth, gameHeight));
