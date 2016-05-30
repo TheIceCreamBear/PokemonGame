@@ -117,93 +117,108 @@ public class Player extends GameObject implements Drawable, Updateable {
 		// Left
 		if (this.playerState.foot == 0) {
 			switch (this.playerState.direction) {
-			case "rightR": {
-
-			}
-				break;
-
-			case "leftR": {
-				// NOOP
-			}
-				break;
-			case "upR": {
-				// NOOP
-			}
-				break;
-			case "downR": {
-				// NOOP
-			}
-				break;
-			case "rightW": {
-				this.currentSprite = playerWalkingSprites[5];
-			}
-				break;
-			case "leftW": {
-				this.currentSprite = playerWalkingSprites[4];
-			}
-				break;
-			case "upW": {
-				this.currentSprite = playerWalkingSprites[9];
-			}
-				break;
-			case "downW": {
-				this.currentSprite = playerWalkingSprites[0];
-			}
-				break;
+				case "rightR": {
+					// NOOP
+					break;
+				}
+				case "leftR": {
+					// NOOP
+					break;
+				}
+				case "upR": {
+					// NOOP
+					break;
+				}
+				case "downR": {
+					// NOOP
+					break;
+				}
+				case "rightW": {
+					this.currentSprite = playerWalkingSprites[5];
+					break;
+				}
+				case "leftW": {
+					this.currentSprite = playerWalkingSprites[4];
+					break;
+				}
+				case "upW": {
+					this.currentSprite = playerWalkingSprites[9];
+					break;
+				}
+				case "downW": {
+					this.currentSprite = playerWalkingSprites[0];
+					break;
+				}
 			}
 		} else if (this.playerState.foot == 1) { // No Foot
 			switch (this.playerState.direction) {
-			case "rightR": {
-				// NOOP
-			}
-			case "leftR": {
-				// NOOP
-			}
-			case "upR": {
-				// NOOP
-			}
-			case "downR": {
-				// NOOP
-			}
-			case "rightW": {
-				this.currentSprite = playerWalkingSprites[8];
-			}
-			case "leftW": {
-				this.currentSprite = playerWalkingSprites[5];
-			}
-			case "upW": {
-				this.currentSprite = playerWalkingSprites[10];
-			}
-			case "downW": {
-				this.currentSprite = playerWalkingSprites[1];
-			}
+				case "rightR": {
+					// NOOP
+					break;
+				}
+				case "leftR": {
+					// NOOP
+					break;
+				}
+				case "upR": {
+					// NOOP
+					break;
+				}
+				case "downR": {
+					// NOOP
+					break;
+				}
+				case "rightW": {
+					this.currentSprite = playerWalkingSprites[8];
+					break;
+				}
+				case "leftW": {
+					this.currentSprite = playerWalkingSprites[5];
+					break;
+				}
+				case "upW": {
+					this.currentSprite = playerWalkingSprites[10];
+					break;
+				}
+				case "downW": {
+					this.currentSprite = playerWalkingSprites[1];
+					break;
+				}
 			}
 		} else if (this.playerState.foot == 2) { // Right
 			switch (this.playerState.direction) {
-			case "rightR": {
-				// NOOP
-			}
-			case "leftR": {
-				// NOOP
-			}
-			case "upR": {
-				// NOOP
-			}
-			case "downR": {
-				// NOOP
-			}
-			case "rightW": {
-				this.currentSprite = playerWalkingSprites[7];
-			}
-			case "leftW": {
-				this.currentSprite = playerWalkingSprites[3];
-			}
-			case "upW": {
-				this.currentSprite = playerWalkingSprites[11];
-			}
-			case "downW": {
-				this.currentSprite = playerWalkingSprites[2];
-			}
+				case "rightR": {
+					// NOOP
+					break;
+				}
+				case "leftR": {
+					// NOOP
+					break;
+				}
+				case "upR": {
+					// NOOP
+					break;
+				}
+				case "downR": {
+					// NOOP
+					break;
+				}
+				case "rightW": {
+					this.currentSprite = playerWalkingSprites[7];
+					break;
+				}
+				case "leftW": {
+					this.currentSprite = playerWalkingSprites[3];
+					break;
+				}
+				case "upW": {
+					this.currentSprite = playerWalkingSprites[11];
+					break;
+				}
+				case "downW": {
+					this.currentSprite = playerWalkingSprites[2];
+					break;
+				}
 			}
 		}
 	}
@@ -216,18 +231,18 @@ public class Player extends GameObject implements Drawable, Updateable {
 	private void initPlayerWalkingSprites() {
 		playerWalkingSprites = new BufferedImage[12];
 		try {
-			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.installDir + "player_down_left_walk.png"));
-			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.installDir + "player_down_no_walk.png"));
-			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.installDir + "player_down_right_walk.png"));
-			playerWalkingSprites[3] = ImageIO.read(new File(Refrence.installDir + "player_left_back_walk.png"));
-			playerWalkingSprites[4] = ImageIO.read(new File(Refrence.installDir + "player_left_front_walk.png"));
-			playerWalkingSprites[5] = ImageIO.read(new File(Refrence.installDir + "player_left_no_walk.png"));
-			playerWalkingSprites[6] = ImageIO.read(new File(Refrence.installDir + "player_right_back_walk.png"));
-			playerWalkingSprites[7] = ImageIO.read(new File(Refrence.installDir + "player_right_front_walk.png"));
-			playerWalkingSprites[8] = ImageIO.read(new File(Refrence.installDir + "player_right_no_walk.png"));
-			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.installDir + "player_up_left_walk.png"));
-			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.installDir + "player_up_no_walk.png"));
-			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.installDir + "player_up_right_walk.png"));
+			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.playerSprites + "player_down_left_walk.png"));
+			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.playerSprites + "player_down_no_walk.png"));
+			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.playerSprites + "player_down_right_walk.png"));
+			playerWalkingSprites[3] = ImageIO.read(new File(Refrence.playerSprites + "player_left_back_walk.png"));
+			playerWalkingSprites[4] = ImageIO.read(new File(Refrence.playerSprites + "player_left_front_walk.png"));
+			playerWalkingSprites[5] = ImageIO.read(new File(Refrence.playerSprites + "player_left_no_walk.png"));
+			playerWalkingSprites[6] = ImageIO.read(new File(Refrence.playerSprites + "player_right_back_walk.png"));
+			playerWalkingSprites[7] = ImageIO.read(new File(Refrence.playerSprites + "player_right_front_walk.png"));
+			playerWalkingSprites[8] = ImageIO.read(new File(Refrence.playerSprites + "player_right_no_walk.png"));
+			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.playerSprites + "player_up_left_walk.png"));
+			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.playerSprites + "player_up_no_walk.png"));
+			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.playerSprites + "player_up_right_walk.png"));
 		} catch (IOException e) {
 			System.err.println("The Files dont exist");
 			e.printStackTrace();
