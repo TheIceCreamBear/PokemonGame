@@ -17,7 +17,6 @@ public class SoundHandler {
 	public boolean running = true;
 
 	public static final int INTRO = 0;
-	public static final int COMBO_BREAKER = 1;
 	public static final int AIRHORN = 2;
 	public static final int WILHELM = 3;
 	public static final int SUPRISE_MOTHER_FUCKER = 4;
