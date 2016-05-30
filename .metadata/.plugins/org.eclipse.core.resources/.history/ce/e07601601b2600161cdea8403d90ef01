@@ -1,0 +1,19 @@
+package com.theicecreambear.player;
+
+import com.theicecreambear.interfaces.Drawable;
+import com.theicecreambear.interfaces.Updateable;
+
+public class Player extends GameObject implements Drawable, Updateable {
+	public OverworldPosition overPos;
+	public WorldPosition pos;
+	// TODO add inventory
+	
+	@Override
+	public void update(long deltaTime) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void draw(long deltaTime) {
+		// TODO Auto-generated method stub
+	}
+}

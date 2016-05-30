@@ -2,4 +2,8 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.swing.border.Border"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
+<fullyQualifiedTypeName name="java.awt.Toolkit"/>
+<fullyQualifiedTypeName name="com.theicecreambear.interfaces.Drawable"/>
+<fullyQualifiedTypeName name="com.theicecreambear.interfaces.Updateable"/>
+<fullyQualifiedTypeName name="com.theicecreambear.game_object.GameObject"/>
 </qualifiedTypeNameHistroy>
