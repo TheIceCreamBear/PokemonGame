@@ -1,0 +1,18 @@
+package com.theicecreambear.game_object;
+
+import com.theicecreambear.interfaces.Drawable;
+import com.theicecreambear.interfaces.Updateable;
+
+public class GameObject implements Drawable, Updateable {
+
+	@Override
+	public void update(long deltaTime) {
+
+	}
+
+	@Override
+	public void draw(long deltaTime) {
+		
+	}
+	
+}

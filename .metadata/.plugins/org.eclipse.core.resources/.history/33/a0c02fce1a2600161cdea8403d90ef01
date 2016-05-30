@@ -1,0 +1,5 @@
+package com.theicecreambear.game_object;
+
+public class GameObject implements Drawable, Updateable {
+
+}

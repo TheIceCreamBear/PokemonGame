@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.127+C:\MineCraftModDevelpoing\Projects\Pokémon\PokemonGame\.metadata\.plugins\org.eclipse.jdt.core
 1269277382.index
 1492968368.index
@@ -18,3 +19,25 @@ INDEX VERSION 1.127+C:\MineCraftModDevelpoing\Projects\Pokémon\PokemonGame\.meta
 3951094714.index
 2164123280.index
 2585328351.index
+=======
+INDEX VERSION 1.127+C:\GitProjects\Pokémon\PokemonGame\.metadata\.plugins\org.eclipse.jdt.core
+225359545.index
+2387809406.index
+486429261.index
+2944555591.index
+2978116687.index
+1065649595.index
+4188064455.index
+207539807.index
+98846114.index
+4029236850.index
+222887928.index
+3533503634.index
+1774022076.index
+2408859782.index
+1886661694.index
+3750928321.index
+2199412376.index
+3286947936.index
+737330823.index
+>>>>>>> 4b0a5b0fb19bd0b5a1320eec54168aecd5db8acc

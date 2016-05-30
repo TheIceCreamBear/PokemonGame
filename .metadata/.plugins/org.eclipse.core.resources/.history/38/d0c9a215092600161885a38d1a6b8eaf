@@ -1,0 +1,8 @@
+package com.theicecreambear.world;
+
+public class PhotoGrid {
+	public PhotoGrid() {
+		System.out.println("Joseph is dumb");
+		System.exit(-1);
+	}
+}
