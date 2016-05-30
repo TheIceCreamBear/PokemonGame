@@ -2,11 +2,10 @@ package com.theicecreambear.gameobject;
 
 import com.theicecreambear.interfaces.Drawable;
 
-public class StaticObject implements Drawable {
+public class StaticObject extends GenericObject implements Drawable {
 
 	@Override
-	public void draw(long deltaTime) {
+	public void draw() {
 		
 	}
-	
 }

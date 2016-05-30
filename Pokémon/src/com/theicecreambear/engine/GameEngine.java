@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import com.theicecreambear.gameobject.GameObject;
+import com.theicecreambear.gameobject.StaticObject;
+import com.theicecreambear.gameobject.UpdateableObject;
+import com.theicecreambear.item.Item;
+import com.theicecreambear.player.OverworldPosition;
+import com.theicecreambear.player.Player;
+import com.theicecreambear.player.WorldPosition;
 import com.theicecreambear.screen.Screen;
 
 public class GameEngine {
@@ -17,8 +23,11 @@ public class GameEngine {
 	Graphics g;
 	BufferedImage i;
 	static String stats;
+	Player p1;
 	
-	ArrayList<GameObject> updateAndDrawable = new ArrayList<GameObject>();
+	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
+	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();
+	static ArrayList<StaticObject> statics = new ArrayList<StaticObject>();
 	
 	public static void main(String[] args) {
 		engine = new GameEngine();
@@ -30,16 +39,37 @@ public class GameEngine {
 	}
 
 	public void initialize() {
-		frame = new JFrame("");
+		frame = new JFrame("Pokemon JD (PC indev)");
 		frame.setBounds(0,0, Screen.width, Screen.height);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// TODO
+		p1 = new Player(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), true, frame);
+		updateableAndDrawable.add(p1);
+		
+		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
+		g = frame.getGraphics();
 	}
 
 	public void update(double deltaTime) {
-
+		for(GameObject gameObject: updateableAndDrawable) {
+			gameObject.update(deltaTime);
+		}
+		
+		for(UpdateableObject upject : updateable) {
+			upject.update(deltaTime);
+		}
 	}
 
 	public void render() {
-
+		for(GameObject gameObject : updateableAndDrawable) {
+			gameObject.draw();
+		}
+		
+		for(StaticObject staject : statics) {
+			staject.draw();
+		}
 	}
 
 	public void run() {
@@ -75,7 +105,13 @@ public class GameEngine {
 			
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
+				seconds++;
+				if(seconds > 60) {
+					seconds %= 60;
+					minutes++;
+				}
 				stats = "Ticks: " + ticks + " FPS: " + fps + " " + hours + ":" + minutes + ":" + seconds;
+				System.out.println(stats);
 				ticks = 0;
 				fps = 0;
 			}

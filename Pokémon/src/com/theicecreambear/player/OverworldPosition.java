@@ -14,4 +14,8 @@ public class OverworldPosition extends Position {
 		this.MAX_X = 10; // TODO add correct values
 		this.MAX_Y = 10;
 	}
+	
+	public OverworldPosition() {
+		this(0,0);
+	}
 }

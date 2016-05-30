@@ -14,4 +14,8 @@ public class WorldPosition extends Position {
 		this.MAX_X = 1000; // TODO add correct values
 		this.MAX_Y = 1000;
 	}
+	
+	public WorldPosition() {
+		this(0,0);
+	}
 }

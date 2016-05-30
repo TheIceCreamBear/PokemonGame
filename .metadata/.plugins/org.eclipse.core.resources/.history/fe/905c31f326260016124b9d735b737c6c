@@ -1,0 +1,108 @@
+package com.theicecreambear.player;
+
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.theicecreambear.gameobject.GameObject;
+import com.theicecreambear.handlers.InputHandler;
+import com.theicecreambear.interfaces.Drawable;
+import com.theicecreambear.interfaces.Updateable;
+import com.theicecreambear.item.Item;
+
+public class Player extends GameObject implements Drawable, Updateable {
+	
+	OverworldPosition owp;
+	WorldPosition wp;
+	InputHandler handler;
+	public boolean male;
+
+	public Player(OverworldPosition owp, WorldPosition wp, ArrayList<Item> bag, boolean male, Component c) {
+		this.owp = owp;
+		this.wp = wp;
+		this.bag = bag;
+		this.male = male;
+		handler = new InputHandler(c);
+	}
+	
+	public Player(OverworldPosition owp, WorldPosition wp, Component c) {
+		this(owp, wp, new ArrayList<Item>(), true, c);
+	}
+	
+	public Player(boolean male, Component c) {
+		this(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), male, c);
+	}
+	
+	// TODO FIX inventory
+	ArrayList<Item> bag;
+
+	@Override
+	public void update(double deltaTime) {
+		
+		// TODO
+		if(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+			wp.x++;
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+			wp.x--;
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+			wp.y++;
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+			wp.y--;
+		}
+	}
+	
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+	}
+	
+	public enum State {
+		RIGHTRUN("right", 0),
+		LEFTRUN("left", 1),
+		DOWNRUN("down", 2),
+		UPRUN("up", 3),
+		RIGHTWALK("right", 4),
+		LEFTWALK("left", 5),
+		DOWNWALK("down", 6),
+		UPWALK("up", 7);
+		
+		private static final Map<String, State> NAME_STATE_MAP = new HashMap<String, State>();
+		private static final Map<Integer, State> ID_STATE_MAP = new HashMap<Integer, State>();
+		private final String direction;
+		private final int id;
+		State(String direction, int id) {
+			this.direction = direction;
+			this.id = id;
+		}
+		
+		public String getDirection() {
+			return this.direction;
+		}
+		
+		public int getId() {
+			return this.id;
+		}
+		
+		public static State getState(String direction) {
+			return (State)NAME_STATE_MAP.get(direction);
+		}
+		
+		static {
+			for (State state : values()) {
+				if (NAME_STATE_MAP.containsKey(state.getDirection()) || ID_STATE_MAP.containsKey(state.getId())) {
+					throw new Error("Clash in State ID & Name pools! Cannot insert " + state);
+				}
+				NAME_STATE_MAP.put(state.getDirection(), state);
+				ID_STATE_MAP.put(Integer.valueOf(state.getId()), state);
+			}
+		}
+	}
+}

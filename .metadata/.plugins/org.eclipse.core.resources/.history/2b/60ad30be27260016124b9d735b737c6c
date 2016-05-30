@@ -1,0 +1,5 @@
+package com.theicecreambear.gameobject;
+
+public class GenericObject {
+
+}

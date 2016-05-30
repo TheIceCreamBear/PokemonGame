@@ -1,26 +1,67 @@
 package com.theicecreambear.player;
 
+import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.theicecreambear.gameobject.GameObject;
+import com.theicecreambear.handlers.InputHandler;
 import com.theicecreambear.interfaces.Drawable;
 import com.theicecreambear.interfaces.Updateable;
 import com.theicecreambear.item.Item;
 
 public class Player extends GameObject implements Drawable, Updateable {
 	
-	// TODO FIX inventory
-	ArrayList<Item> bag = new ArrayList<Item>();
+	OverworldPosition owp;
+	WorldPosition wp;
+	InputHandler handler;
+	public boolean male;
+
+	public Player(OverworldPosition owp, WorldPosition wp, ArrayList<Item> bag, boolean male, Component c) {
+		this.owp = owp;
+		this.wp = wp;
+		this.bag = bag;
+		this.male = male;
+		handler = new InputHandler(c);
+	}
 	
+	public Player(OverworldPosition owp, WorldPosition wp, Component c) {
+		this(owp, wp, new ArrayList<Item>(), true, c);
+	}
+	
+	public Player(boolean male, Component c) {
+		this(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), male, c);
+	}
+	
+	// TODO FIX inventory
+	ArrayList<Item> bag;
+
 	@Override
-	public void update(long deltaTime) {
-		// TODO Auto-generated method stub
+	public void update(double deltaTime) {
+		
+		// TODO
+		if(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+			wp.x++;
+			// wp.x += sprite.width * (isRnning) ? 2 : 1; 
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+			wp.x--;
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+			wp.y++;
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+			wp.y--;
+		}
 	}
 	
 	@Override
-	public void draw(long deltaTime) {
+	public void draw() {
 		// TODO Auto-generated method stub
 	}
 	

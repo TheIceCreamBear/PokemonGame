@@ -1,0 +1,13 @@
+package com.theicecreambear.gameobject;
+
+import com.theicecreambear.player.OverworldPosition;
+import com.theicecreambear.player.WorldPosition;
+import com.theicecreambear.world.Coordinate;
+
+public class GenericObject {
+	
+	public OverworldPosition overPos;
+	public WorldPosition pos;
+	public Coordinate cords;
+
+}

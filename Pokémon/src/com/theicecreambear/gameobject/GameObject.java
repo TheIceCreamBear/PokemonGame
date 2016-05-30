@@ -2,17 +2,10 @@ package com.theicecreambear.gameobject;
 
 import com.theicecreambear.interfaces.Drawable;
 import com.theicecreambear.interfaces.Updateable;
-import com.theicecreambear.player.OverworldPosition;
-import com.theicecreambear.player.WorldPosition;
 import com.theicecreambear.world.Coordinate;
 
-public class GameObject implements Drawable, Updateable {
+public class GameObject extends GenericObject implements Drawable, Updateable {
 	
-	public OverworldPosition overPos;
-	public WorldPosition pos;
-	
-	public Coordinate cords;
-
 	// Explicit
 	public GameObject(int x, int y) {
 		cords = new Coordinate(x, y);
@@ -25,12 +18,12 @@ public class GameObject implements Drawable, Updateable {
 	
 	
 	@Override
-	public void update(long deltaTime) {
-
+	public void update(double deltaTime) {
+		
 	}
 
 	@Override
-	public void draw(long deltaTime) {
+	public void draw() {
 		
 	}
 	
