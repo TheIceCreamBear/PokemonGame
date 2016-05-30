@@ -1,0 +1,14 @@
+package com.theicecreambear.sprites;
+
+import com.theicecreambear.tiles.Tile;
+
+public class Sprites extends Tile {
+
+	
+	public Sprites(int id) {
+		
+	}
+	
+	public Sprites(int id
+
+}

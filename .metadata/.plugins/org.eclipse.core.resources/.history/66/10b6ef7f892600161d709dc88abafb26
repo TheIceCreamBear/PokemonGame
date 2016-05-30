@@ -1,0 +1,11 @@
+package com.theicecreambear.sprites;
+
+import com.theicecreambear.tiles.Tile;
+
+public class Sprites extends Tile {
+
+	Tile[][] sprite;
+	private final int MAX_X;
+	private final int MAX_Y;
+	
+}

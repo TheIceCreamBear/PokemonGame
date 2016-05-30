@@ -1,11 +1,14 @@
 package com.theicecreambear.gameobject;
 
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
+
 import com.theicecreambear.interfaces.Drawable;
 
 public class StaticObject extends GenericObject implements Drawable {
 
 	@Override
-	public void draw() {
+	public void draw(Graphics g, ImageObserver observer) {
 		
 	}
 }

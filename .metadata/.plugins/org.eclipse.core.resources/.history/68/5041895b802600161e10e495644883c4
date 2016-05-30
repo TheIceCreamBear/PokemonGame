@@ -1,0 +1,8 @@
+package com.theicecreambear.pokémon;
+
+public class GenericPokémon {
+	public int id;
+	public BufferedImage sprite;
+	
+	
+}

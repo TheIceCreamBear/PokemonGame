@@ -1,0 +1,24 @@
+package com.theicecreambear.gameobject;
+
+public class Trigger extends UpdateableObject {
+	boolean condition = false;
+	
+	public Trigger() {
+		
+	}
+	
+	public void start() {
+		while(!condition) {
+			update();
+		}
+		
+		event();
+	}
+	public void update() {
+		
+	}
+	
+	public void event() {
+		
+	}
+}

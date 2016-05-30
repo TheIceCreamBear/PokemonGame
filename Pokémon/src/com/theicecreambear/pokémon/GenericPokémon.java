@@ -1,5 +1,12 @@
 package com.theicecreambear.pokémon;
 
-public class GenericPokémon {
+import java.awt.image.BufferedImage;
 
+public class GenericPokémon {
+	public int id;
+	public BufferedImage sprite;
+	
+	public GenericPokémon() {
+		
+	}
 }

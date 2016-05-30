@@ -1,7 +1,10 @@
 package com.theicecreambear.engine;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -21,10 +24,12 @@ public class GameEngine {
 	public JFrame frame;
 	public static GameEngine engine;
 	public Graphics g;
+	public Graphics g2;
 	public BufferedImage i;
-	public static String stats;
+	public static String stats = "";
 	private Player p1;
 	
+	/* The three types of Game Objects */
 	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
 	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();
 	static ArrayList<StaticObject> statics = new ArrayList<StaticObject>();
@@ -45,10 +50,11 @@ public class GameEngine {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// TODO
-		p1 = new Player(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), true, frame);
+		p1 = new Player(new OverworldPosition(0,0), new WorldPosition(0,0), new ArrayList<Item>(), true, frame);
 		updateableAndDrawable.add(p1);
 		
 		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
+		g2 = i.createGraphics();
 		g = frame.getGraphics();
 	}
 
@@ -62,14 +68,22 @@ public class GameEngine {
 		}
 	}
 
-	public void render() {
-		for(GameObject gameObject : updateableAndDrawable) {
-			gameObject.draw();
-		}
+	public void render(Graphics g, ImageObserver observer) {
 		
-		for(StaticObject staject : statics) {
-			staject.draw();
+		g2.setColor(Color.BLACK);
+		g2.fillRect(0, 0, Screen.width, Screen.height);
+		
+		for(GameObject gameObject : updateableAndDrawable) {
+			gameObject.draw(g2, observer);
 		}
+		for(StaticObject staject : statics) {
+			staject.draw(g, observer);
+		}
+		g2.setColor(Color.GREEN);
+		g2.setFont(new Font("Arial", 1, 20));
+		g2.drawString(stats, 25, 60);
+		
+		g.drawImage(i, 0, 0, frame);
 	}
 
 	public void run() {
@@ -80,13 +94,16 @@ public class GameEngine {
 		int ticks = 0;
 		int fps = 0;
 		long timer = System.currentTimeMillis();
-		long frameLimit = 60;
+		long frameLimit = 80;
 		long currentTime;
 		 int seconds = 0;
 		 int minutes = 0;
 		 int hours = 0;
 
 		while (running) {
+			currentTime = System.nanoTime();
+			deltaTime += (currentTime - time) / ms;
+			time = currentTime;
 
 			if (deltaTime >= 1) {
 				update(deltaTime);
@@ -94,7 +111,7 @@ public class GameEngine {
 				deltaTime--;
 			}
 			
-			render();
+			render(g, frame);
 			fps++;
 			
 			while(deltaTime < frameLimit) {
@@ -110,7 +127,9 @@ public class GameEngine {
 					seconds %= 60;
 					minutes++;
 				}
-				stats = "Ticks: " + ticks + " FPS: " + fps + " " + hours + ":" + minutes + ":" + seconds;
+				
+				// GT stands for GameTime. P.C statnds for Player coordinates
+				stats = "Ticks: " + ticks + " FPS: " + fps + " GT: " + hours + ":" + minutes + ":" + seconds + " P.C: " + p1.wp.toString();
 				System.out.println(stats);
 				ticks = 0;
 				fps = 0;

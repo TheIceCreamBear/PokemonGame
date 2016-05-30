@@ -1,0 +1,17 @@
+package com.theicecreambear.gameobject;
+
+public class Trigger extends UpdateableObject {
+	boolean condition = false;
+	
+	public Trigger() {
+		while(!condition) {
+			update();
+		}
+	}
+	
+	public void update(double deltaTime) {
+		
+	}
+	
+	public void event
+}

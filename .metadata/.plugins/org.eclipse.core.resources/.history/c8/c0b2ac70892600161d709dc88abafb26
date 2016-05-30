@@ -1,0 +1,15 @@
+package com.theicecreambear.sprites;
+
+import com.theicecreambear.tiles.Tile;
+
+public class Sprites extends Tile {
+
+	Tile[][] sprite;
+	private final int MAX_X;
+	private final int MAX_Y;
+	
+	public Sprites(int id) {
+		sprite = new Tile[MAX_X][MAX_Y];
+		super();
+	}
+}

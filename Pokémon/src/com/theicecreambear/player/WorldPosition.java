@@ -18,4 +18,8 @@ public class WorldPosition extends Position {
 	public WorldPosition() {
 		this(0,0);
 	}
+	
+	public String toString() {
+		return "x: " + x + " y: " + y;
+	}
 }

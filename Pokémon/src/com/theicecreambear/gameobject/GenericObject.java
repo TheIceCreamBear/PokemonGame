@@ -6,8 +6,8 @@ import com.theicecreambear.world.Coordinate;
 
 public class GenericObject {
 	
-	public OverworldPosition overPos;
-	public WorldPosition pos;
+	public OverworldPosition owp;
+	public WorldPosition wp;
 	public Coordinate cords;
 
 }
