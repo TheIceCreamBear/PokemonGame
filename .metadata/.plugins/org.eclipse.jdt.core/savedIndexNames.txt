@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.127+C:\GitProjects\Pokémon\PokemonGame\.metadata\.plugins\org.eclipse.jdt.core
 225359545.index
 2387809406.index
@@ -18,3 +19,7 @@ INDEX VERSION 1.127+C:\GitProjects\Pokémon\PokemonGame\.metadata\.plugins\org.ec
 2199412376.index
 3286947936.index
 737330823.index
+=======
+INDEX VERSION 1.127+C:\MineCraftModDevelpoing\Projects\Pokémon\PokemonGame\.metadata\.plugins\org.eclipse.jdt.core
+4029236850.index
+>>>>>>> 5fade349101e98017a63c2aec9cd534dbe44007e
