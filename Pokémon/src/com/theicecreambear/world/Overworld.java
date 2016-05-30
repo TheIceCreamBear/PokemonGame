@@ -6,8 +6,11 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Overworld {
-	public int overworldX;
-	public int overworldY;
+
+	// public int overworldX;
+	// public int overworldY;
+
+	public Coordinate position = new Coordinate(0, 0); // Default coordinates
 
 	public BufferedImage overWorldMap;
 
@@ -20,7 +23,7 @@ public class Overworld {
 			overWorldMap = ImageIO.read(directory);
 		} catch (Exception e) {
 			e.printStackTrace();
-			// JOptionPane.showMessageDialog(null, "There was an error reading the world map Image
+			// JOptionPane.showMessageDialog(null, "There was an error reading the world map Image");
 		}
 	}
 }
