@@ -159,7 +159,7 @@
           <tags>removeOnHide</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_ubZ14CXlEea6PPsCC0Omlg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="AudioSystem.class" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/classf_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.ClassFileEditor&quot; name=&quot;AudioSystem.class&quot; partName=&quot;AudioSystem.class&quot; title=&quot;AudioSystem.class&quot; tooltip=&quot;javax.sound.sampled.AudioSystem&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.jdt.ui.ClassFileEditorInputFactory&quot; org.eclipse.jdt.ui.ClassFileIdentifier=&quot;=Pok&#xe9;mon/C:\/Program Files\/Java\/jre1.8.0_73\/lib\/rt.jar&amp;lt;javax.sound.sampled(AudioSystem.class&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;5841&quot; selectionTopPixel=&quot;3927&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.ClassFileEditor&quot; name=&quot;AudioSystem.class&quot; partName=&quot;AudioSystem.class&quot; title=&quot;AudioSystem.class&quot; tooltip=&quot;javax.sound.sampled.AudioSystem&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.jdt.ui.ClassFileEditorInputFactory&quot; org.eclipse.jdt.ui.ClassFileIdentifier=&quot;=Pok&#xe9;mon/C:\/Program Files\/Java\/jre1.8.0_73\/lib\/rt.jar&amp;lt;javax.sound.sampled(AudioSystem.class&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;9984&quot; selectionTopPixel=&quot;3927&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.ClassFileEditor</tags>
           <tags>removeOnHide</tags>
@@ -299,7 +299,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AnzHIiXhEeatu4P4_8vZFw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_wn3YVyXjEea6PPsCC0Omlg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_AYC19iXhEeatu4P4_8vZFw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_mHv-0CX_EeaYxvzBKJERXg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_AYC19iXhEeatu4P4_8vZFw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AnzHIyXhEeatu4P4_8vZFw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -354,29 +354,29 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AnzHJyXhEeatu4P4_8vZFw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_woAiRiXjEea6PPsCC0Omlg" elementId="history.group">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mHx0ACX_EeaYxvzBKJERXg" elementId="history.group">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_woAiRyXjEea6PPsCC0Omlg" elementId="group.application" visible="false">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mHx0ASX_EeaYxvzBKJERXg" elementId="group.application" visible="false">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_woAiSCXjEea6PPsCC0Omlg" elementId="backardHistory">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mHx0AiX_EeaYxvzBKJERXg" elementId="backardHistory">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_woAiSSXjEea6PPsCC0Omlg" elementId="forwardHistory">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mHx0AyX_EeaYxvzBKJERXg" elementId="forwardHistory">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_woAiSiXjEea6PPsCC0Omlg" elementId="pin.group">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mHx0BCX_EeaYxvzBKJERXg" elementId="pin.group">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_woAiSyXjEea6PPsCC0Omlg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_AYC1biXhEeatu4P4_8vZFw"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_wu3YNyXjEea6PPsCC0Omlg" elementId="org.eclipse.ui.edit.text.gotoNextAnnotation">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_mHybECX_EeaYxvzBKJERXg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_AYC1biXhEeatu4P4_8vZFw"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mPV0kCX_EeaYxvzBKJERXg" elementId="org.eclipse.ui.edit.text.gotoNextAnnotation">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_wu3YOCXjEea6PPsCC0Omlg" elementId="org.eclipse.ui.edit.text.gotoPreviousAnnotation">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mPWboCX_EeaYxvzBKJERXg" elementId="org.eclipse.ui.edit.text.gotoPreviousAnnotation">
           <tags>Opaque</tags>
         </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_wu3YOSXjEea6PPsCC0Omlg" elementId="org.eclipse.ui.edit.text.gotoLastEditPosition">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mPWboSX_EeaYxvzBKJERXg" elementId="org.eclipse.ui.edit.text.gotoLastEditPosition">
           <tags>Opaque</tags>
         </children>
       </children>
