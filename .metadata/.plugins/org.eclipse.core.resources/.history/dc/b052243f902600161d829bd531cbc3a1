@@ -69,6 +69,7 @@ public class GameEngine {
 	}
 
 	public void render(Graphics g, ImageObserver observer) {
+		
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 0, Screen.width, Screen.height);
 		
