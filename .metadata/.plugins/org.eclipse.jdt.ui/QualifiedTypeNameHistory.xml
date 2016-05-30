@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.border.Border"/>
-<<<<<<< HEAD
-=======
-<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
-<fullyQualifiedTypeName name="java.awt.Toolkit"/>
-<fullyQualifiedTypeName name="com.theicecreambear.interfaces.Drawable"/>
-<fullyQualifiedTypeName name="com.theicecreambear.interfaces.Updateable"/>
-<fullyQualifiedTypeName name="com.theicecreambear.game_object.GameObject"/>
->>>>>>> 4b0a5b0fb19bd0b5a1320eec54168aecd5db8acc
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>

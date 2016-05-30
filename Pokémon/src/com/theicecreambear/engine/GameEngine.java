@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import com.theicecreambear.game_object.GameObject;
+import com.theicecreambear.gameobject.GameObject;
 import com.theicecreambear.screen.Screen;
 
 public class GameEngine {
