@@ -20,10 +20,10 @@ public class GameEngine {
 	public static boolean running = true;
 	public JFrame frame;
 	public static GameEngine engine;
-	Graphics g;
-	BufferedImage i;
-	static String stats;
-	Player p1;
+	public Graphics g;
+	public BufferedImage i;
+	public static String stats;
+	private Player p1;
 	
 	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
 	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();

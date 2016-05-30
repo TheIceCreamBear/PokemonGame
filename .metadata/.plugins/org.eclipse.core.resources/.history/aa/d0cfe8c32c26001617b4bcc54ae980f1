@@ -1,0 +1,161 @@
+package com.theicecreambear.player;
+
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.theicecreambear.gameobject.GameObject;
+import com.theicecreambear.handlers.InputHandler;
+import com.theicecreambear.interfaces.Drawable;
+import com.theicecreambear.interfaces.Updateable;
+import com.theicecreambear.item.Item;
+
+public class Player extends GameObject implements Drawable, Updateable {
+	
+	private State playerState;
+	
+	private BufferedImage[] playerWalkingSprites = new BufferedImage[12];
+	
+	private OverworldPosition owp;
+	private WorldPosition wp;
+	private InputHandler handler;
+	public boolean male;
+
+	public Player(OverworldPosition owp, WorldPosition wp, ArrayList<Item> bag, boolean male, Component c) {
+		this.owp = owp;
+		this.wp = wp;
+		this.bag = bag;
+		this.male = male;
+		handler = new InputHandler(c);
+		this.playerState = State.DOWNWALK;
+	}
+	
+	public Player(OverworldPosition owp, WorldPosition wp, Component c) {
+		this(owp, wp, new ArrayList<Item>(), true, c);
+	}
+	
+	public Player(boolean male, Component c) {
+		this(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), male, c);
+	}
+	
+	// TODO FIX inventory
+	ArrayList<Item> bag;
+
+	@Override
+	public void update(double deltaTime) {
+		
+		// TODO
+		if(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+			wp.x++;
+			this.playerState.direction = "right";
+			this.playerState.nextFoot();
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+			wp.x--;
+			this.playerState.direction = "left";
+			this.playerState.nextFoot();
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+			wp.y++;
+			this.playerState.direction = "up";
+			this.playerState.nextFoot();
+		}
+		
+		if(handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+			wp.y--;
+			this.playerState.direction = "down";
+			this.playerState.nextFoot();
+		}
+	}
+	
+	@Override
+	public void draw() {
+		if (this.playerState.isRunning) {
+			switch (this.playerState.direction) {
+				case "right": {
+					
+				}
+				case "left": {
+					
+				}
+				case "up": {
+					
+				}
+				case "down": {
+					
+				}
+			}
+		} else {
+			switch (this.playerState.direction) {
+				case "right": {
+					
+				}
+				case "left": {
+					
+				}
+				case "up": {
+					
+				}
+				case "down": {
+					
+				}
+			}
+		}
+	}
+	
+	public enum State {
+		RIGHTRUN("right", true, true),
+		LEFTRUN("left", true, true),
+		DOWNRUN("down", true, true),
+		UPRUN("up", true, true),
+		RIGHTWALK("right", false, true),
+		LEFTWALK("left", false, true),
+		DOWNWALK("down", false, true),
+		UPWALK("up", false, true),
+		NOTMOVING("none", false, true);
+		
+		private static final Map<String, State> NAME_STATE_MAP = new HashMap<String, State>();
+		private String direction;
+		private boolean isRunning;
+		private boolean left;
+		State(String direction, boolean running, boolean left) {
+			this.direction = direction;
+			this.isRunning = running;
+			this.left = left;
+		}
+		
+		public String getDirection() {
+			return this.direction;
+		}
+		
+		public boolean isPlayerRunning() {
+			return isRunning;
+		}
+		
+		public boolean isNextStepOnLeft() {
+			return left;
+		}
+		
+		public void nextFoot() {
+			left = (left) ? false : true;
+		}
+		
+		public static State getState(String direction) {
+			return (State)NAME_STATE_MAP.get(direction);
+		}
+		
+		static {
+			for (State state : values()) {
+				if (NAME_STATE_MAP.containsKey(state.getDirection())) {
+					throw new Error("Clash in State Name pools! Cannot insert " + state);
+				}
+				NAME_STATE_MAP.put(state.getDirection(), state);
+			}
+		}
+	}
+}

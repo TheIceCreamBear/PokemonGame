@@ -1,0 +1,20 @@
+package com.theicecreambear.engine;
+
+public class GameEngine implements Drawable, Updateable {
+	public static boolean running = true;
+	
+	public GameEngine() {
+		initialize();
+		run();
+	}
+	
+	public void initialize() {
+		
+	}
+	
+	public void run() {
+		while(running) {
+			
+		}
+	}
+}
