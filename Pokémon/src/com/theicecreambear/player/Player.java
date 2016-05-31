@@ -147,6 +147,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 				wp.y = 0;
 			}
 		}
+<<<<<<< HEAD
 
 		try {
 			if (isStill) {
@@ -213,6 +214,112 @@ public class Player extends GameObject implements Drawable, Updateable {
 						currentSprite = playerWalkingSprites[1];
 						break;
 					}
+=======
+		// Left
+		if (this.playerState.foot == 0) {
+			switch (this.playerState.direction) {
+				case "rightR": {
+					// NOOP
+					break;
+				}
+				case "leftR": {
+					// NOOP
+					break;
+				}
+				case "upR": {
+					// NOOP
+					break;
+				}
+				case "downR": {
+					// NOOP
+					break;
+				}
+				case "rightW": {
+					this.currentSprite = playerWalkingSprites[5];
+					break;
+				}
+				case "leftW": {
+					this.currentSprite = playerWalkingSprites[4];
+					break;
+				}
+				case "upW": {
+					this.currentSprite = playerWalkingSprites[9];
+					break;
+				}
+				case "downW": {
+					this.currentSprite = playerWalkingSprites[0];
+					break;
+				}
+			}
+		} else if (this.playerState.foot == 1) { // No Foot
+			switch (this.playerState.direction) {
+				case "rightR": {
+					// NOOP
+					break;
+				}
+				case "leftR": {
+					// NOOP
+					break;
+				}
+				case "upR": {
+					// NOOP
+					break;
+				}
+				case "downR": {
+					// NOOP
+					break;
+				}
+				case "rightW": {
+					this.currentSprite = playerWalkingSprites[8];
+					break;
+				}
+				case "leftW": {
+					this.currentSprite = playerWalkingSprites[5];
+					break;
+				}
+				case "upW": {
+					this.currentSprite = playerWalkingSprites[10];
+					break;
+				}
+				case "downW": {
+					this.currentSprite = playerWalkingSprites[1];
+					break;
+				}
+			}
+		} else if (this.playerState.foot == 2) { // Right
+			switch (this.playerState.direction) {
+				case "rightR": {
+					// NOOP
+					break;
+				}
+				case "leftR": {
+					// NOOP
+					break;
+				}
+				case "upR": {
+					// NOOP
+					break;
+				}
+				case "downR": {
+					// NOOP
+					break;
+				}
+				case "rightW": {
+					this.currentSprite = playerWalkingSprites[7];
+					break;
+				}
+				case "leftW": {
+					this.currentSprite = playerWalkingSprites[3];
+					break;
+				}
+				case "upW": {
+					this.currentSprite = playerWalkingSprites[11];
+					break;
+				}
+				case "downW": {
+					this.currentSprite = playerWalkingSprites[2];
+					break;
+>>>>>>> 6d3592c86be5aaa748652a6a63336245f409bcba
 				}
 			}
 		} catch (Exception e) {
@@ -321,6 +428,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 	private void initPlayerWalkingSprites() {
 		playerWalkingSprites = new BufferedImage[12];
 		try {
+<<<<<<< HEAD
 			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.playerStill + "up.png"));
 			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.playerStill + "down.png"));
 			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.playerStill + "left.png"));
@@ -335,6 +443,20 @@ public class Player extends GameObject implements Drawable, Updateable {
 			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.playerWalkingRight + "down.png"));
 			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.playerWalkingRight + "left.png"));
 			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.playerWalkingRight + "right.png"));
+=======
+			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.playerSprites + "player_down_left_walk.png"));
+			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.playerSprites + "player_down_no_walk.png"));
+			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.playerSprites + "player_down_right_walk.png"));
+			playerWalkingSprites[3] = ImageIO.read(new File(Refrence.playerSprites + "player_left_back_walk.png"));
+			playerWalkingSprites[4] = ImageIO.read(new File(Refrence.playerSprites + "player_left_front_walk.png"));
+			playerWalkingSprites[5] = ImageIO.read(new File(Refrence.playerSprites + "player_left_no_walk.png"));
+			playerWalkingSprites[6] = ImageIO.read(new File(Refrence.playerSprites + "player_right_back_walk.png"));
+			playerWalkingSprites[7] = ImageIO.read(new File(Refrence.playerSprites + "player_right_front_walk.png"));
+			playerWalkingSprites[8] = ImageIO.read(new File(Refrence.playerSprites + "player_right_no_walk.png"));
+			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.playerSprites + "player_up_left_walk.png"));
+			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.playerSprites + "player_up_no_walk.png"));
+			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.playerSprites + "player_up_right_walk.png"));
+>>>>>>> 6d3592c86be5aaa748652a6a63336245f409bcba
 		} catch (IOException e) {
 			System.err.println("The Files don't exist");
 			e.printStackTrace();

@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import com.theicecreambear.player.WorldPosition;
+import com.theicecreambear.refrence.Refrence;
 
 public class Tile {
 
@@ -23,9 +24,8 @@ public class Tile {
 	}
 
 	public BufferedImage getTile(int id) {
-		String preDirectrix = "resources/tiles/";
 		try {
-			return ImageIO.read(new File(preDirectrix + id));
+			return ImageIO.read(new File(Refrence.tiles + id));
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "There was an error reading the tiles");
