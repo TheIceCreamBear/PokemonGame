@@ -97,6 +97,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 			// "rightR" : "rightW";
 			// this.playerState.nextFoot();
 
+			
 			direction = "right";
 			// TODO
 			if (wp.x > wp.MAX_X) {
@@ -110,7 +111,9 @@ public class Player extends GameObject implements Drawable, Updateable {
 			// this.playerState.direction = (this.playerState.isRunning) ?
 			// "leftR" : "leftW";
 			// this.playerState.nextFoot();
-
+			
+			
+			
 			direction = "left";
 			// TODO
 			if (wp.x < 0) {
@@ -212,120 +215,120 @@ public class Player extends GameObject implements Drawable, Updateable {
 					}
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage());
-		}
+			catch(Exception e) {
+				
+			}
+					}
 		// Left
-		// if (this.playerState.foot == 0) {
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// break;
-		// }
-		// case "leftR": {
-		// // NOOP
-		// break;
-		// }
-		// case "upR": {
-		// // NOOP
-		// break;
-		// }
-		// case "downR": {
-		// // NOOP
-		// break;
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[5];
-		// break;
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[4];
-		// break;
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[9];
-		// break;
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[0];
-		// break;
-		// }
-		// }
-		// } else if (this.playerState.foot == 1) { // No Foot
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// break;
-		// }
-		// case "leftR": {
-		// // NOOP
-		// break;
-		// }
-		// case "upR": {
-		// // NOOP
-		// break;
-		// }
-		// case "downR": {
-		// // NOOP
-		// break;
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[8];
-		// break;
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[5];
-		// break;
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[10];
-		// break;
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[1];
-		// break;
-		// }
-		// }
-		// } else if (this.playerState.foot == 2) { // Right
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// break;
-		// }
-		// case "leftR": {
-		// // NOOP
-		// break;
-		// }
-		// case "upR": {
-		// // NOOP
-		// break;
-		// }
-		// case "downR": {
-		// // NOOP
-		// break;
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[7];
-		// break;
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[3];
-		// break;
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[11];
-		// break;
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[2];
-		// break;
-		// }
-		// }
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// System.exit(1);
-		// }
+//		if (this.playerState.foot == 0) {
+//			switch (this.playerState.direction) {
+//				case "rightR": {
+//					// NOOP
+//					break;
+//				}
+//				case "leftR": {
+//					// NOOP
+//					break;
+//				}
+//				case "upR": {
+//					// NOOP
+//					break;
+//				}
+//				case "downR": {
+//					// NOOP
+//					break;
+//				}
+//				case "rightW": {
+//					this.currentSprite = playerWalkingSprites[5];
+//					break;
+//				}
+//				case "leftW": {
+//					this.currentSprite = playerWalkingSprites[4];
+//					break;
+//				}
+//				case "upW": {
+//					this.currentSprite = playerWalkingSprites[9];
+//					break;
+//				}
+//				case "downW": {
+//					this.currentSprite = playerWalkingSprites[0];
+//					break;
+//				}
+//			}
+//		} else if (this.playerState.foot == 1) { // No Foot
+//			switch (this.playerState.direction) {
+//				case "rightR": {
+//					// NOOP
+//					break;
+//				}
+//				case "leftR": {
+//					// NOOP
+//					break;
+//				}
+//				case "upR": {
+//					// NOOP
+//					break;
+//				}
+//				case "downR": {
+//					// NOOP
+//					break;
+//				}
+//				case "rightW": {
+//					this.currentSprite = playerWalkingSprites[8];
+//					break;
+//				}
+//				case "leftW": {
+//					this.currentSprite = playerWalkingSprites[5];
+//					break;
+//				}
+//				case "upW": {
+//					this.currentSprite = playerWalkingSprites[10];
+//					break;
+//				}
+//				case "downW": {
+//					this.currentSprite = playerWalkingSprites[1];
+//					break;
+//				}
+//			}
+//		} else if (this.playerState.foot == 2) { // Right
+//			switch (this.playerState.direction) {
+//				case "rightR": {
+//					// NOOP
+//					break;
+//				}
+//				case "leftR": {
+//					// NOOP
+//					break;
+//				}
+//				case "upR": {
+//					// NOOP
+//					break;
+//				}
+//				case "downR": {
+//					// NOOP
+//					break;
+//				}
+//				case "rightW": {
+//					this.currentSprite = playerWalkingSprites[7];
+//					break;
+//				}
+//				case "leftW": {
+//					this.currentSprite = playerWalkingSprites[3];
+//					break;
+//				}
+//				case "upW": {
+//					this.currentSprite = playerWalkingSprites[11];
+//					break;
+//				}
+//				case "downW": {
+//					this.currentSprite = playerWalkingSprites[2];
+//					break;
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.exit(1);
+//		}
 		// // Left
 		// if (this.playerState.foot == 0) {
 		// switch (this.playerState.direction) {

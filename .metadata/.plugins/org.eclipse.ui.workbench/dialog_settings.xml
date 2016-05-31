@@ -26,7 +26,6 @@
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
-			<item value="C:\Users\Joseph\workspace\Pokemon\src\item"/>
 			<item value="C:\Users\Joseph\workspace\Pokemon\src\world"/>
 			<item value="C:\Users\Joseph\workspace\Pokemon\src\player"/>
 			<item value="C:\Users\Joseph\workspace\Pokemon\src\engine"/>

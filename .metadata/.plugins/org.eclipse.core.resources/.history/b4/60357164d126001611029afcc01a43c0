@@ -214,7 +214,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage(););
 		}
 		// Left
 		// if (this.playerState.foot == 0) {
