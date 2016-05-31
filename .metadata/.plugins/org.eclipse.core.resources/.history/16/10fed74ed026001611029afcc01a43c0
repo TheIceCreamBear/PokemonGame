@@ -125,11 +125,6 @@ public class GameEngine {
 				if(seconds > 60) {
 					seconds %= 60;
 					minutes++;
-					
-					if(minutes > 60) {
-						minutes %= 60;
-						hours++;
-					}
 				}
 				
 				// GT stands for GameTime. P.C stands for Player coordinates

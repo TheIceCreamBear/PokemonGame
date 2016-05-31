@@ -67,6 +67,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 	@Override
 	public void update(double deltaTime) {
+		scale += .001;
 
 		if (!(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)
 				|| handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)
