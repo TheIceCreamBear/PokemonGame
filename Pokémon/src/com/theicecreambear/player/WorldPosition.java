@@ -1,5 +1,7 @@
 package com.theicecreambear.player;
 
+import com.theicecreambear.screen.Screen;
+
 public class WorldPosition extends Position {
 
 	public int x;
@@ -11,8 +13,8 @@ public class WorldPosition extends Position {
 		super(x, y);
 		this.x = x;
 		this.y = y;
-		this.MAX_X = 1000; // TODO add correct values
-		this.MAX_Y = 1000;
+		this.MAX_X = Screen.width; // TODO add correct values
+		this.MAX_Y = Screen.height;
 	}
 	
 	public WorldPosition() {

@@ -7,6 +7,6 @@ public class GenericPokémon {
 	public BufferedImage sprite;
 	
 	public GenericPokémon() {
-		
+		System.out.println("Joseph is a n00b");
 	}
 }

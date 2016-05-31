@@ -127,7 +127,7 @@ public class GameEngine {
 					minutes++;
 				}
 				
-				// GT stands for GameTime. P.C statnds for Player coordinates
+				// GT stands for GameTime. P.C stands for Player coordinates
 				stats = "Ticks: " + ticks + " FPS: " + fps + " GT: " + hours + ":" + minutes + ":" + seconds + " P.C: " + p1.wp.toString();
 				System.out.println(stats);
 				ticks = 0;
