@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
-<fullyQualifiedTypeName name="com.theicecreambear.refrence.Refrence"/>
 <fullyQualifiedTypeName name="com.theicecreambear.engine.Engine"/>
-<fullyQualifiedTypeName name="com.theicecreambear.interfaces.Drawable"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-<fullyQualifiedTypeName name="com.theicecreambear.screen.Screen"/>
+<fullyQualifiedTypeName name="com.theicecreambear.refrence.Refrence"/>
 </qualifiedTypeNameHistroy>

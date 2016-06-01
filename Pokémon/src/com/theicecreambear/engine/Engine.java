@@ -19,6 +19,7 @@ import com.theicecreambear.handlers.SoundHandler;
 
 
 /**
+ * @deprecated - Very old, please don't use
  * @author David Santamaria
  * @version 0.2.6 Contains everything necessary to update and render a game.
  *          Contains a <code> clock </code> that updates and renders for every
@@ -46,7 +47,8 @@ public class Engine {
 	
 	private Thread soundThread;
 	
-	public static void main(String[] args) {
+	
+	public static void initOldEngine(String[] args) {
 		new Engine();
 	}
 

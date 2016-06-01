@@ -34,7 +34,16 @@ public class GameEngine {
 	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();
 	static ArrayList<StaticObject> statics = new ArrayList<StaticObject>();
 	
+	/**
+	 * @deprecated - This method is going to be removed in the final export of the game so that 
+	 * <code> Main.main()</code> will be invoked when executing the exported .jar
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		engine = new GameEngine();
+	}
+	
+	public static void startGameEngine(String[] args) {
 		engine = new GameEngine();
 	}
 	
@@ -44,7 +53,7 @@ public class GameEngine {
 	}
 
 	public void initialize() {
-		frame = new JFrame("Pokemon JD (PC indev)");
+		frame = new JFrame("Pokemon Remastered (PC indev)");
 		frame.setBounds(0,0, Screen.width, Screen.height);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

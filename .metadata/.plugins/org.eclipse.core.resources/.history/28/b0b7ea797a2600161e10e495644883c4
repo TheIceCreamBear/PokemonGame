@@ -1,0 +1,121 @@
+package com.theicecreambear.engine;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
+import com.theicecreambear.gameobject.GameObject;
+import com.theicecreambear.gameobject.StaticObject;
+import com.theicecreambear.gameobject.UpdateableObject;
+import com.theicecreambear.item.Item;
+import com.theicecreambear.player.OverworldPosition;
+import com.theicecreambear.player.Player;
+import com.theicecreambear.player.WorldPosition;
+import com.theicecreambear.screen.Screen;
+
+public class GameEngine {
+	
+	public static boolean running = true;
+	public JFrame frame;
+	public static GameEngine engine;
+	public Graphics2D g;
+	public BufferedImage i;
+	public static String stats;
+	private Player p1;
+	
+	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
+	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();
+	static ArrayList<StaticObject> statics = new ArrayList<StaticObject>();
+	
+	public static void main(String[] args) {
+		engine = new GameEngine();
+	}
+	
+	public GameEngine() {
+		initialize();
+		run();
+	}
+
+	public void initialize() {
+		frame = new JFrame("Pokemon JD (PC indev)");
+		frame.setBounds(0,0, Screen.width, Screen.height);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// TODO
+		p1 = new Player(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), true, frame);
+		updateableAndDrawable.add(p1);
+		
+		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
+		g = frame.getGraphics();
+	}
+
+	public void update(double deltaTime) {
+		for(GameObject gameObject: updateableAndDrawable) {
+			gameObject.update(deltaTime);
+		}
+		
+		for(UpdateableObject upject : updateable) {
+			upject.update(deltaTime);
+		}
+	}
+
+	public void render(Graphics2D g) {
+		for(GameObject gameObject : updateableAndDrawable) {
+			gameObject.draw(g);
+		}
+		
+		for(StaticObject staject : statics) {
+			staject.draw();
+		}
+	}
+
+	public void run() {
+		long time = System.nanoTime();
+		final double tick = 60.0;
+		double ms = 1000000000 / tick;
+		double deltaTime = 0;
+		int ticks = 0;
+		int fps = 0;
+		long timer = System.currentTimeMillis();
+		long frameLimit = 60;
+		long currentTime;
+		 int seconds = 0;
+		 int minutes = 0;
+		 int hours = 0;
+
+		while (running) {
+
+			if (deltaTime >= 1) {
+				update(deltaTime);
+				ticks++;
+				deltaTime--;
+			}
+			
+			render(g);
+			fps++;
+			
+			while(deltaTime < frameLimit) {
+				currentTime = System.nanoTime();
+				deltaTime += (currentTime - time) / ms;
+				time = currentTime;
+			}
+			
+			if (System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+				seconds++;
+				if(seconds > 60) {
+					seconds %= 60;
+					minutes++;
+				}
+				stats = "Ticks: " + ticks + " FPS: " + fps + " " + hours + ":" + minutes + ":" + seconds;
+				System.out.println(stats);
+				ticks = 0;
+				fps = 0;
+			}
+		}
+	}
+}

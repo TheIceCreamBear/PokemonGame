@@ -25,6 +25,9 @@ import com.theicecreambear.screen.Screen;
 public class Player extends GameObject implements Drawable, Updateable {
 
 	public BufferedImage[] playerWalkingSprites;
+	
+	// TODO FIX inventory
+	private ArrayList<Item> bag;
 
 	// private State playerState;
 	private BufferedImage currentSprite;
@@ -62,8 +65,6 @@ public class Player extends GameObject implements Drawable, Updateable {
 		this(new OverworldPosition(), new WorldPosition(), new ArrayList<Item>(), male, c);
 	}
 
-	// TODO FIX inventory
-	ArrayList<Item> bag;
 
 	@Override
 	public void update(double deltaTime) {

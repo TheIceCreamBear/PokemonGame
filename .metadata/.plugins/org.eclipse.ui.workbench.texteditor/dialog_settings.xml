@@ -2,15 +2,12 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="The Files don&apos;t" key="selection"/>
+		<item value="Array" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="The files don&apos;t"/>
-			<item value="The files dont "/>
-			<item value="isRunning"/>
 			<item value="array"/>
 		</list>
 		<list key="replacehistory">
