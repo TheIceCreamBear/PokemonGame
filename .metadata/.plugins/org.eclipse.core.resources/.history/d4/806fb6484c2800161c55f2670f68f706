@@ -1,0 +1,5 @@
+package com.theicecreambear.refrence;
+
+public class KeyBindings {
+	public static int playerRun;
+}

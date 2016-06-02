@@ -25,7 +25,7 @@ public class Tile {
 
 	public BufferedImage getTile(int id) {
 		try {
-			return ImageIO.read(new File(Refrence.tiles + id));
+			return ImageIO.read(new File(Refrence.TILES + id));
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "There was an error reading the tiles");

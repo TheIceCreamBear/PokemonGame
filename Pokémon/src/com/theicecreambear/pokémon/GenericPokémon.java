@@ -3,7 +3,8 @@ package com.theicecreambear.pokémon;
 import java.awt.image.BufferedImage;
 
 public class GenericPokémon {
-	public int id;
+	private int id;
+	private String name;
 	public BufferedImage sprite;
 	
 	public GenericPokémon() {

@@ -16,6 +16,7 @@ import com.theicecreambear.item.Item;
 import com.theicecreambear.player.OverworldPosition;
 import com.theicecreambear.player.Player;
 import com.theicecreambear.player.WorldPosition;
+import com.theicecreambear.refrence.Refrence;
 import com.theicecreambear.screen.Screen;
 
 public class GameEngine {
@@ -80,6 +81,7 @@ public class GameEngine {
 	public void render(Graphics g, ImageObserver observer) {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 0, Screen.width, Screen.height);
+		g2.drawImage(Refrence.tileMap, 0, 0, frame);
 		
 		for(GameObject gameObject : updateableAndDrawable) {
 			gameObject.draw(g2, observer);
@@ -104,9 +106,9 @@ public class GameEngine {
 		long timer = System.currentTimeMillis();
 		long frameLimit = 80;
 		long currentTime;
-		 int seconds = 0;
-		 int minutes = 0;
-		 int hours = 0;
+		int seconds = 0;
+		int minutes = 0;
+		int hours = 0;
 
 		while (running) {
 			currentTime = System.nanoTime();

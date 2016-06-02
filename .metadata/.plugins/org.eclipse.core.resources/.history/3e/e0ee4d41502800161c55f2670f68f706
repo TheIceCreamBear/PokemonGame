@@ -1,0 +1,7 @@
+package com.theicecreambear.commands;
+
+public class Commands {
+	public static void executeCommand(String command) {
+		
+	}
+}

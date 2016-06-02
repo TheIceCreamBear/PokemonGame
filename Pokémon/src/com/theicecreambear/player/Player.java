@@ -19,8 +19,8 @@ import com.theicecreambear.handlers.InputHandler;
 import com.theicecreambear.interfaces.Drawable;
 import com.theicecreambear.interfaces.Updateable;
 import com.theicecreambear.item.Item;
+import com.theicecreambear.item.Items;
 import com.theicecreambear.refrence.Refrence;
-import com.theicecreambear.screen.Screen;
 
 public class Player extends GameObject implements Drawable, Updateable {
 
@@ -29,7 +29,6 @@ public class Player extends GameObject implements Drawable, Updateable {
 	// TODO FIX inventory
 	private ArrayList<Item> bag;
 
-	// private State playerState;
 	private BufferedImage currentSprite;
 
 	private OverworldPosition owp;
@@ -49,12 +48,8 @@ public class Player extends GameObject implements Drawable, Updateable {
 		this.bag = bag;
 		this.male = male;
 		this.handler = new InputHandler(c);
-		// this.playerState = State.DOWNWALK;
 		this.initPlayerWalkingSprites();
 		this.currentSprite = playerWalkingSprites[1];
-		// if (this.currentSprite == null) {
-		// System.exit(-1);
-		// }
 	}
 
 	public Player(OverworldPosition owp, WorldPosition wp, Component c) {
@@ -68,6 +63,10 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 	@Override
 	public void update(double deltaTime) {
+		
+		if (handler.isKeyDown(KeyEvent.VK_ESCAPE)) {
+			System.exit(-1);
+		}
 
 		if (!(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)
 				|| handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)
@@ -77,26 +76,18 @@ public class Player extends GameObject implements Drawable, Updateable {
 		} else {
 			isStill = false;
 		}
-		isRunning = isStill ? false : handler.isKeyDown(KeyEvent.VK_SHIFT) ? true : false;
+		isRunning = isStill ? false : handler.isKeyDown(KeyEvent.VK_SHIFT) && this.bag.contains(Items.runningShoes) ? true : false;
 
 		switch (direction) {
 		case "up":
 		case "down":
-			rightFootOut = wp.y % 2 == 1;
-			break;
-
 		case "left":
 		case "right":
-			rightFootOut = wp.x % 2 == 1;
-			break;
 		}
 
 		// TODO
 		if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
 			wp.x += isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-			// this.playerState.direction = (this.playerState.isRunning) ?
-			// "rightR" : "rightW";
-			// this.playerState.nextFoot();
 
 			direction = "right";
 			// TODO
@@ -108,9 +99,6 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 		if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
 			wp.x -= isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-			// this.playerState.direction = (this.playerState.isRunning) ?
-			// "leftR" : "leftW";
-			// this.playerState.nextFoot();
 
 			direction = "left";
 			// TODO
@@ -122,9 +110,6 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 		if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
 			wp.y -= isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-			// this.playerState.direction = (this.playerState.isRunning) ? "upR"
-			// : "upW";
-			// this.playerState.nextFoot();
 
 			direction = "up";
 			// TODO
@@ -135,9 +120,6 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 		if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
 			wp.y += isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-			// this.playerState.direction = (this.playerState.isRunning) ?
-			// "downR" : "downW";
-			// this.playerState.nextFoot();
 
 			direction = "down";
 			// TODO
@@ -217,208 +199,6 @@ public class Player extends GameObject implements Drawable, Updateable {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
-		// Left
-		// if (this.playerState.foot == 0) {
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// break;
-		// }
-		// case "leftR": {
-		// // NOOP
-		// break;
-		// }
-		// case "upR": {
-		// // NOOP
-		// break;
-		// }
-		// case "downR": {
-		// // NOOP
-		// break;
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[5];
-		// break;
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[4];
-		// break;
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[9];
-		// break;
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[0];
-		// break;
-		// }
-		// }
-		// } else if (this.playerState.foot == 1) { // No Foot
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// break;
-		// }
-		// case "leftR": {
-		// // NOOP
-		// break;
-		// }
-		// case "upR": {
-		// // NOOP
-		// break;
-		// }
-		// case "downR": {
-		// // NOOP
-		// break;
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[8];
-		// break;
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[5];
-		// break;
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[10];
-		// break;
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[1];
-		// break;
-		// }
-		// }
-		// } else if (this.playerState.foot == 2) { // Right
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// break;
-		// }
-		// case "leftR": {
-		// // NOOP
-		// break;
-		// }
-		// case "upR": {
-		// // NOOP
-		// break;
-		// }
-		// case "downR": {
-		// // NOOP
-		// break;
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[7];
-		// break;
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[3];
-		// break;
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[11];
-		// break;
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[2];
-		// break;
-		// }
-		// }
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// System.exit(1);
-		// }
-		// // Left
-		// if (this.playerState.foot == 0) {
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		//
-		// }
-		// break;
-		//
-		// case "leftR": {
-		// // NOOP
-		// }
-		// break;
-		// case "upR": {
-		// // NOOP
-		// }
-		// break;
-		// case "downR": {
-		// // NOOP
-		// }
-		// break;
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[5];
-		// }
-		// break;
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[4];
-		// }
-		// break;
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[9];
-		// }
-		// break;
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[0];
-		// }
-		// break;
-		// }
-		// } else if (this.playerState.foot == 1) { // No Foot
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// }
-		// case "leftR": {
-		// // NOOP
-		// }
-		// case "upR": {
-		// // NOOP
-		// }
-		// case "downR": {
-		// // NOOP
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[8];
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[5];
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[10];
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[1];
-		// }
-		// }
-		// } else if (this.playerState.foot == 2) { // Right
-		// switch (this.playerState.direction) {
-		// case "rightR": {
-		// // NOOP
-		// }
-		// case "leftR": {
-		// // NOOP
-		// }
-		// case "upR": {
-		// // NOOP
-		// }
-		// case "downR": {
-		// // NOOP
-		// }
-		// case "rightW": {
-		// this.currentSprite = playerWalkingSprites[7];
-		// }
-		// case "leftW": {
-		// this.currentSprite = playerWalkingSprites[3];
-		// }
-		// case "upW": {
-		// this.currentSprite = playerWalkingSprites[11];
-		// }
-		// case "downW": {
-		// this.currentSprite = playerWalkingSprites[2];
-		// }
-		// }
-		// }
 	}
 
 	@Override
@@ -429,50 +209,55 @@ public class Player extends GameObject implements Drawable, Updateable {
 	private void initPlayerWalkingSprites() {
 		playerWalkingSprites = new BufferedImage[12];
 		try {
-			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.playerStill + "up.png"));
-			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.playerStill + "down.png"));
-			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.playerStill + "left.png"));
-			playerWalkingSprites[3] = ImageIO.read(new File(Refrence.playerStill + "right.png"));
+			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + "up.png"));
+			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + "down.png"));
+			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + "left.png"));
+			playerWalkingSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + "right.png"));
 
-			playerWalkingSprites[4] = ImageIO.read(new File(Refrence.playerWalkingLeft + "up.png"));
-			playerWalkingSprites[5] = ImageIO.read(new File(Refrence.playerWalkingLeft + "down.png"));
-			playerWalkingSprites[6] = ImageIO.read(new File(Refrence.playerWalkingLeft + "left.png"));
-			playerWalkingSprites[7] = ImageIO.read(new File(Refrence.playerWalkingLeft + "right.png"));
+			playerWalkingSprites[4] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "up.png"));
+			playerWalkingSprites[5] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "down.png"));
+			playerWalkingSprites[6] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "left.png"));
+			playerWalkingSprites[7] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "right.png"));
 
-			playerWalkingSprites[8] = ImageIO.read(new File(Refrence.playerWalkingRight + "up.png"));
-			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.playerWalkingRight + "down.png"));
-			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.playerWalkingRight + "left.png"));
-			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.playerWalkingRight + "right.png"));
+			playerWalkingSprites[8] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "up.png"));
+			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "down.png"));
+			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "left.png"));
+			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "right.png"));
 
 		} catch (IOException e) {
-			System.err.println("The Files don't exist");
+			System.err.println("One or more player sprites don't exist");
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * @deprecated - Currently not in use, only here for nostilgia
+	 * @author Joseph
+	 *
+	 */
 	public enum State {
-		RIGHTRUN("rightR", true, 1), LEFTRUN("leftR", true, 1), DOWNRUN("downR", true, 1), UPRUN("upR", true,
-				1), RIGHTWALK("rightW", false, 1), LEFTWALK("leftW", false,
-						1), DOWNWALK("downW", false, 1), UPWALK("upW", false, 1), NOTMOVING("none", false, 1);
+		RIGHTRUN("rightR", true, 1), 
+		LEFTRUN("leftR", true, 1), 
+		DOWNRUN("downR", true, 1), 
+		UPRUN("upR", true, 1), 
+		RIGHTWALK("rightW", false, 1), 
+		LEFTWALK("leftW", false, 1), 
+		DOWNWALK("downW", false, 1), 
+		UPWALK("upW", false, 1), 
+		NOTMOVING("none", false, 1);
 
 		private static final Map<String, State> NAME_STATE_MAP = new HashMap<String, State>();
 		private String direction;
-		// private boolean isRunning = false;
 		private int foot; // 0 left, 1 no, 2 right
 
 		State(String direction, boolean running, int foot) {
 			this.direction = direction;
-			// this.isRunning = running;
 			this.foot = foot;
 		}
 
 		public String getDirection() {
 			return this.direction;
 		}
-
-		// public boolean isPlayerRunning() {
-		// return isRunning;
-		// }
 
 		public int getfoot() {
 			return foot;

@@ -18,7 +18,7 @@ public class GameObject extends GenericObject implements Drawable, Updateable {
 		cords = new Coordinate(x, y);
 	}
 	
-	// More exlicit default
+	// More explicit default
 	public GameObject(int x, int y) {
 		this(new OverworldPosition(), new WorldPosition(), 0,0);
 	}
