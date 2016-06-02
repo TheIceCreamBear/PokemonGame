@@ -53,11 +53,12 @@ public class Starter {
 		commandLine.setEditable(true);
 		commandLine.setBorder(null);
 		commandLine.setToolTipText("For Developers Only");
+		commandLine.setFont(new Font("Arial", 1, 11));
 		frame.add(commandLine);
 		
 		icon = new ImageIcon(ImageIO.read(new File(Refrence.GUI_IMAGES + "exeBtn.png")));
-		executeCmd = new JButton(icon);
-		executeCmd.setToolTipText("For Developers Only");
+		executeCmd = new JButton();
+		executeCmd.setToolTipText("Executes the command in the command line");
 		executeCmd.setBounds(220, 10, 90, 30);
 		executeCmd.addActionListener(new ActionListener() {
 			@Override
