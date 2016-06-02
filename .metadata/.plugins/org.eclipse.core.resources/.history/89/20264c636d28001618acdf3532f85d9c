@@ -8,7 +8,7 @@ public class Commands {
 		if (command.equalsIgnoreCase("/exit")) {
 			System.exit(-1);
 		}
-		if (command.contains("/loadAdminSave")) {
+		if (command.contains("/load")) {
 			String[] args = command.split(" ");
 		}
 	}
