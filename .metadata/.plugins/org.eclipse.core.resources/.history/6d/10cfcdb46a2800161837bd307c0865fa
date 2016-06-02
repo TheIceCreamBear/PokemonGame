@@ -1,0 +1,9 @@
+package com.theicecreambear.player;
+
+public class TilePosition {
+	private WorldPosition overPos;
+	
+	public TilePosition(int x, int y) {
+		
+	}
+}

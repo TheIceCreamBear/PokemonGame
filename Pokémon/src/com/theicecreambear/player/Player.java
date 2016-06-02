@@ -28,6 +28,8 @@ public class Player extends GameObject implements Drawable, Updateable {
 	
 	// TODO FIX inventory
 	private ArrayList<Item> bag;
+	// TODO Possible Inventory
+	private HashMap<Item, Integer> bagWithCount;
 
 	private BufferedImage currentSprite;
 
@@ -35,12 +37,14 @@ public class Player extends GameObject implements Drawable, Updateable {
 	// TODO change back to private
 	public WorldPosition wp;
 	private InputHandler handler;
+	private double scale = .04;
+
 	public boolean male;
 	public boolean isRunning;
 	public boolean isStill;
 	public String direction = "";
+	public boolean footOut;
 	public boolean rightFootOut;
-	double scale = .03;
 
 	public Player(OverworldPosition owp, WorldPosition wp, ArrayList<Item> bag, boolean male, Component c) {
 		this.owp = owp;
@@ -84,9 +88,30 @@ public class Player extends GameObject implements Drawable, Updateable {
 		case "left":
 		case "right":
 		}
+		
+		// KEPP IN TILE CODE
+		if (isStill && wp.x % 22 != 0) {
+			if (wp.x % 22 > 11) {
+				wp.x += wp.x % 11;
+			} else if (wp.x % 22 < 11) {
+				wp.x -= wp.x % 11;
+			} else {
+				// NOOP
+			}
+		}
+		if (isStill && wp.y % 22 != 0) {
+			if (wp.y % 22 > 11) {
+				wp.y += wp.y % 11;
+			} else if (wp.y % 22 < 11) {
+				wp.y -= wp.y % 11;
+			} else {
+				// NOOP
+			}
+		}
+		// END KEEP IN TILE CODE
 
 		// TODO
-		if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+		if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D) && !isOtherMoveKeyDown(KeyEvent.VK_D)) {
 			wp.x += isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
 
 			direction = "right";
@@ -97,7 +122,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 			}
 		}
 
-		if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+		if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A) && !isOtherMoveKeyDown(KeyEvent.VK_A)) {
 			wp.x -= isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
 
 			direction = "left";
@@ -108,7 +133,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 			}
 		}
 
-		if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+		if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W) && !isOtherMoveKeyDown(KeyEvent.VK_W)) {
 			wp.y -= isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
 
 			direction = "up";
@@ -118,7 +143,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 			}
 		}
 
-		if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+		if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S) && !isOtherMoveKeyDown(KeyEvent.VK_S)) {
 			wp.y += isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
 
 			direction = "down";
@@ -204,6 +229,59 @@ public class Player extends GameObject implements Drawable, Updateable {
 	@Override
 	public void draw(Graphics g, ImageObserver observer) {
 		g.drawImage(this.currentSprite, wp.x, wp.y, observer);
+	}
+	
+	private boolean isOtherMoveKeyDown(int currentKey) {
+		if (currentKey == KeyEvent.VK_UP || currentKey == KeyEvent.VK_W) {
+			if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+				return true;
+			}
+			
+		}
+		if (currentKey == KeyEvent.VK_DOWN || currentKey == KeyEvent.VK_S) {
+			if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+				return true;
+			}
+			
+		}
+		if (currentKey == KeyEvent.VK_LEFT || currentKey == KeyEvent.VK_A) {
+			if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) {
+				return true;
+			}
+			
+		}
+		if (currentKey == KeyEvent.VK_RIGHT || currentKey == KeyEvent.VK_D) {
+			if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)) {
+				return true;
+			}
+			if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)) {
+				return true;
+			}
+			
+		}
+		
+		return false;
 	}
 
 	private void initPlayerWalkingSprites() {

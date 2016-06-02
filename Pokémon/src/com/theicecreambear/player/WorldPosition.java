@@ -22,6 +22,6 @@ public class WorldPosition extends Position {
 	}
 	
 	public String toString() {
-		return "x: " + x + " y: " + y;
+		return "x: " + x + " %: " + x % 22 +" y: " + y + " %: " + y % 22;
 	}
 }

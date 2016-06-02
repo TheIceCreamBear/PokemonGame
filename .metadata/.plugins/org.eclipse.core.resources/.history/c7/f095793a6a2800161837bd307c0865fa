@@ -1,0 +1,5 @@
+package com.theicecreambear.player;
+
+public class TilePosition {
+
+}
