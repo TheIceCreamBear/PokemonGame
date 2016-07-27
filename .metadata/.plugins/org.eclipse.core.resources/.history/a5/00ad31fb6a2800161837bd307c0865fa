@@ -1,9 +1,0 @@
-package com.theicecreambear.player;
-
-public class TilePosition {
-	private WorldPosition worldPos;
-	
-	public TilePosition(int x, int y, WorldPosition pos) {
-		this.worldPos = pos;
-	}
-}

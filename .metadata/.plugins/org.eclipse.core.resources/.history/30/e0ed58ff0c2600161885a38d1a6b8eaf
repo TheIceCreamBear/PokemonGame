@@ -1,8 +1,0 @@
-package com.theicecreambear.spriteTests;
-
-import java.awt.image.BufferedImage;
-
-public class SpriteAlpha {
-	BufferedImage img;
-	int id;
-}

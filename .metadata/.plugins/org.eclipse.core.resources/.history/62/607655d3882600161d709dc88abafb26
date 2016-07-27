@@ -1,7 +1,0 @@
-package com.theicecreambear.tiles;
-
-public class Tile {
-	BufferedImage tile;
-	public int id;
-	WorldPosition pw;
-}

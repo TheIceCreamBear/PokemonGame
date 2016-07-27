@@ -1,5 +1,0 @@
-package com.theicecreambear.item;
-
-public class MatserBall implements IPokéBall {
-	
-}

@@ -1,6 +1,5 @@
 package com.theicecreambear.starter;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.theicecreambear.commands.Commands;
 import com.theicecreambear.engine.GameEngine;
 import com.theicecreambear.refrence.Refrence;
 import com.theicecreambear.screen.Screen;
@@ -62,8 +60,8 @@ public class Starter {
 		executeCmd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Commands.executeCommand(commandLine.getText());
-				commandLine.setText(null);
+				// TODO
+				commandLine.setText("");
 			}
 		});
 		frame.add(executeCmd);
@@ -74,12 +72,5 @@ public class Starter {
 		frame.add(label);
 		
 		frame.setVisible(true);
-		this.runStartUpLoop();
-	}
-	
-	private void runStartUpLoop() {
-		while (true) {
-			// TODO
-		}
 	}
 }

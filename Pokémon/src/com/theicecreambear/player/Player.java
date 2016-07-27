@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import com.theicecreambear.engine.GameEngine;
 import com.theicecreambear.gameobject.GameObject;
 import com.theicecreambear.handlers.InputHandler;
 import com.theicecreambear.interfaces.Drawable;
@@ -41,15 +42,21 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 	public boolean male;
 	public boolean isRunning;
+	public boolean isInMovingPlus;
+	public boolean isInMovingMinus;
 	public boolean isStill;
 	public String direction = "";
 	public boolean footOut;
 	public boolean rightFootOut;
+	
+	private int localTicks = 0;
+	private int lastTick = 0;
 
 	public Player(OverworldPosition owp, WorldPosition wp, ArrayList<Item> bag, boolean male, Component c) {
 		this.owp = owp;
 		this.wp = wp;
 		this.bag = bag;
+		this.bagWithCount = new HashMap<Item, Integer>();
 		this.male = male;
 		this.handler = new InputHandler(c);
 		this.initPlayerWalkingSprites();
@@ -67,9 +74,24 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 	@Override
 	public void update(double deltaTime) {
+		this.localTicks++;
 		
-		if (handler.isKeyDown(KeyEvent.VK_ESCAPE)) {
+		
+		if (handler.isKeyDown(KeyEvent.VK_ESCAPE) && GameEngine.instance.isConsoleShowing()) {
+			GameEngine.instance.hideConsole();
+		}
+		
+		if (handler.isKeyDown(KeyEvent.VK_ESCAPE) && !GameEngine.instance.isConsoleShowing()) {
 			System.exit(-1);
+		}
+		
+		if (handler.isKeyDown(KeyEvent.VK_DIVIDE)) {
+			GameEngine.instance.showConsole();
+			// TODO Console showing stuffs
+		}
+		
+		if (GameEngine.instance.isConsoleShowing()) {
+			return;
 		}
 
 		if (!(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)
@@ -80,7 +102,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 		} else {
 			isStill = false;
 		}
-		isRunning = isStill ? false : handler.isKeyDown(KeyEvent.VK_SHIFT) && this.bag.contains(Items.runningShoes) ? true : false;
+		isRunning = isStill ? false : handler.isKeyDown(KeyEvent.VK_SHIFT) /*&& this.bag.contains(Items.runningShoes)*/ ? true : false;
 
 		switch (direction) {
 		case "up":
@@ -89,70 +111,208 @@ public class Player extends GameObject implements Drawable, Updateable {
 		case "right":
 		}
 		
-		// KEPP IN TILE CODE
-		if (isStill && wp.x % 22 != 0) {
-			if (wp.x % 22 > 11) {
-				wp.x += wp.x % 11;
-			} else if (wp.x % 22 < 11) {
-				wp.x -= wp.x % 11;
-			} else {
-				// NOOP
-			}
-		}
-		if (isStill && wp.y % 22 != 0) {
-			if (wp.y % 22 > 11) {
-				wp.y += wp.y % 11;
-			} else if (wp.y % 22 < 11) {
-				wp.y -= wp.y % 11;
-			} else {
-				// NOOP
-			}
-		}
-		// END KEEP IN TILE CODE
 
-		// TODO
-		if (handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D) && !isOtherMoveKeyDown(KeyEvent.VK_D)) {
-			wp.x += isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
+		if (((handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) && !isOtherMoveKeyDown(KeyEvent.VK_D))/* || isInMoving*/) {
+			isInMovingPlus = true;
+			if (isRunning) {
+				if (this.localTicks == 15) {
+					wp.x += 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 30) {
+					wp.x += 11;
+					isStill = true;
+				}
+				
+				if (this.localTicks == 45) {   // TODO - Possibly make a local tics to the player class and increase it by one every update() call
+					wp.x += 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.x += 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			} else {
+				if (this.localTicks == 30) {
+					wp.x += 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.x += 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			}
 
 			direction = "right";
-			// TODO
-			if (wp.x > wp.MAX_X) {
-				wp.x = 0;
-				owp.x++;
-			}
 		}
 
 		if (handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A) && !isOtherMoveKeyDown(KeyEvent.VK_A)) {
-			wp.x -= isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-
+			isInMovingMinus = true;
+			if (isRunning) {
+				if (this.localTicks == 15) {
+					wp.x -= 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 30) {
+					wp.x -= 11;
+					isStill = true;
+				}
+				
+				if (this.localTicks == 45) {
+					wp.x -= 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.x -= 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			} else {
+				if (this.localTicks == 30) {
+					wp.x -= 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.x -= 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			}
+			
 			direction = "left";
-			// TODO
-			if (wp.x < 0) {
-				wp.x = wp.MAX_X;
-				owp.x--;
-			}
 		}
-
+		// TODO - Possible Soultion to this madness would to 
+		// check every 30 ticks and then move the player by 11 pixles
 		if (handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W) && !isOtherMoveKeyDown(KeyEvent.VK_W)) {
-			wp.y -= isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-
-			direction = "up";
-			// TODO
-			if (wp.y < 0) {
-				wp.y = wp.MAX_Y;
+			isInMovingMinus = true;
+			if (isRunning) {
+				if (this.localTicks == 15) {
+					wp.y -= 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 30) {
+					wp.y -= 11;
+					isStill = true;
+				}
+				
+				if (this.localTicks == 45) {
+					wp.y -= 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.y -= 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			} else {
+				if (this.localTicks == 30) {
+					wp.y -= 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.y -= 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
 			}
+			
+			direction = "up";
 		}
 
 		if (handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S) && !isOtherMoveKeyDown(KeyEvent.VK_S)) {
-			wp.y += isRunning ? (int) (scale * 2 * deltaTime) : (int) (scale * deltaTime);
-
+			isInMovingPlus = true;
+			if (isRunning) {
+				if (this.localTicks == 15) {
+					wp.y += 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 30) {
+					wp.y += 11;
+					isStill = true;
+				}
+				
+				if (this.localTicks == 45) {
+					wp.y += 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.y += 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			} else {
+				if (this.localTicks == 30) {
+					wp.y += 11;
+					rightFootOut = !rightFootOut;
+					isStill = false;
+				}
+				
+				if (this.localTicks == 60) {
+					wp.y += 11;
+					isStill = true;
+					this.localTicks = 0;
+				}
+			}
+			
 			direction = "down";
-			// TODO
-			if (wp.y > wp.MAX_Y) {
-				wp.y = 0;
+		}
+		
+		// KEPP IN TILE CODE
+		if (isInMovingPlus) {
+			if (wp.x % 22 == 11) {
+				if (this.localTicks == 60) {
+					wp.x += 11;
+					isStill = true;
+				}
+			}
+			if (wp.y % 22 == 11) {
+				if (this.localTicks == 60) {
+					wp.y += 11;
+					isStill = true;
+				}
 			}
 		}
-
+		if (isInMovingMinus) {
+			if (wp.x % 22 == 11) {
+				if (this.localTicks == 60) {
+					wp.x -= 11;
+					isStill = true;
+				}
+			}
+			if (wp.y % 22 == 11) {
+				if (this.localTicks == 60) {
+					wp.y -= 11;
+					isStill = true;
+				}
+			}
+		}
+		// END KEEP IN TILE CODE
+		
+		// PLAYER SPRITES
 		try {
 			if (isStill) {
 				switch (direction) {

@@ -8,6 +8,8 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import com.theicecreambear.gameobject.GameObject;
 import com.theicecreambear.gameobject.StaticObject;
@@ -22,13 +24,17 @@ import com.theicecreambear.screen.Screen;
 public class GameEngine {
 	
 	public static boolean running = true;
+	public static GameEngine instance;
+	public static String stats = "";
 	public JFrame frame;
-	public static GameEngine engine;
 	public Graphics g;
 	public Graphics g2;
 	public BufferedImage i;
-	public static String stats = "";
 	private Player p1;
+	
+	private JTextArea consoleReadout;
+	private JTextField consoleIn;
+	private boolean consoleShowing;
 	
 	/* The three types of Game Objects */
 	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
@@ -36,16 +42,16 @@ public class GameEngine {
 	static ArrayList<StaticObject> statics = new ArrayList<StaticObject>();
 	
 	/**
-	 * @deprecated - This method is going to be removed in the final export of the game so that 
-	 * <code> Main.main()</code> will be invoked when executing the exported .jar
+	 * @deprecated - This method may get to be removed in the final export of the game so that 
+	 * {@code Main.main()} will be invoked when executing the exported .jar
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		engine = new GameEngine();
+		instance = new GameEngine();
 	}
 	
 	public static void startGameEngine(String[] args) {
-		engine = new GameEngine();
+		instance = new GameEngine();
 	}
 	
 	public GameEngine() {
@@ -59,6 +65,18 @@ public class GameEngine {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		consoleReadout = new JTextArea(); 
+		consoleReadout.setEditable(false);
+		consoleReadout.setBounds(0, 0, 600, 400);
+		consoleReadout.setBorder(null);
+		consoleReadout.setRows(10);
+		
+		consoleIn = new JTextField();
+		consoleIn.setBounds(0, 401, 600, 30);
+		consoleIn.setBorder(null);
+		consoleIn.setEditable(true);
+		
+		
 		// TODO
 		p1 = new Player(new OverworldPosition(0,0), new WorldPosition(0,0), new ArrayList<Item>(), true, frame);
 		updateableAndDrawable.add(p1);
@@ -66,6 +84,8 @@ public class GameEngine {
 		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
 		g2 = i.createGraphics();
 		g = frame.getGraphics();
+		
+		instance = this;
 	}
 
 	public void update(double deltaTime) {
@@ -96,12 +116,17 @@ public class GameEngine {
 		g.drawImage(i, 0, 0, frame);
 	}
 
+	/**
+	 * THIS IS BAD CODE PLACEMENT AND ORGANIZATION AND IM SORRY, BUT IM TRYING THINGS
+	 */
+	public int ticks;
+	
 	public void run() {
 		long time = System.nanoTime();
 		final double tick = 60.0;
 		double ms = 1000000000 / tick;
 		double deltaTime = 0;
-		int ticks = 0;
+		ticks = 0;
 		int fps = 0;
 		long timer = System.currentTimeMillis();
 		long frameLimit = 80;
@@ -116,8 +141,8 @@ public class GameEngine {
 			time = currentTime;
 
 			if (deltaTime >= 1) {
-				update(deltaTime);
 				ticks++;
+				update(deltaTime);
 				deltaTime--;
 			}
 			
@@ -144,11 +169,32 @@ public class GameEngine {
 				}
 				
 				// GT stands for GameTime. P.C stands for Player coordinates
-				stats = "Ticks: " + ticks + " FPS: " + fps + " GT: " + hours + ":" + minutes + ":" + seconds + " P.C: " + p1.wp.toString();
+				stats = "Ticks: " + ticks + " FPS: " + fps + " GT: " + ((hours < 10) ? "0" + hours : hours) + ":" + ((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds);
 				System.out.println(stats);
 				ticks = 0;
 				fps = 0;
+				p1.isInMovingPlus = false;
+				p1.isInMovingMinus = false;
+				System.gc();
 			}
 		}
+	}
+
+	public boolean isConsoleShowing() {
+		return consoleShowing;
+	}
+
+	public void showConsole() {
+		consoleShowing = true;
+		frame.add(consoleReadout);
+		frame.add(consoleIn);
+		// TODO Possibly stop pause engine if console is showing?
+		
+	}
+	
+	public void hideConsole() {
+		consoleShowing = false;
+		frame.remove(consoleReadout);
+		frame.remove(consoleIn);
 	}
 }

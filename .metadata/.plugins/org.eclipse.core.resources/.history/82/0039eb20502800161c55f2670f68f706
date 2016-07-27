@@ -1,7 +1,0 @@
-package com.theicecreambear.commands;
-
-public class Commands {
-	public void executeCommand(String command) {
-		
-	}
-}
