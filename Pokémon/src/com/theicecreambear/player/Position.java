@@ -9,4 +9,8 @@ public class Position {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public String toString() {
+		return "x: " + x + " %: " + x % 22 +" y: " + y + " %: " + y % 22;
+	}
 }

@@ -1,5 +1,7 @@
 package com.theicecreambear.player;
 
+import com.theicecreambear.screen.Screen;
+
 public class OverworldPosition extends Position {
 
 	public int x;
@@ -11,8 +13,8 @@ public class OverworldPosition extends Position {
 		super(x, y);
 		this.x = x;
 		this.y = y;
-		this.MAX_X = 10; // TODO add correct values
-		this.MAX_Y = 10;
+		this.MAX_X = Screen.width / 11; // TODO add correct values
+		this.MAX_Y = Screen.height / 11;
 	}
 	
 	public OverworldPosition() {

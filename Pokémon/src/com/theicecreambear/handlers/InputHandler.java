@@ -79,4 +79,18 @@ public class InputHandler {
 
 		return null;
 	}
+	
+	public synchronized boolean isMoveKeyDown() {
+		// right, left, up, down
+		if (this.isKeyDown(KeyEvent.VK_RIGHT) || this.isKeyDown(KeyEvent.VK_D)) {
+			return true;
+		} else if (this.isKeyDown(KeyEvent.VK_LEFT) || this.isKeyDown(KeyEvent.VK_A)) {
+			return true;
+		} else if (this.isKeyDown(KeyEvent.VK_UP) || this.isKeyDown(KeyEvent.VK_W)) {
+			return true;
+		} else if (this.isKeyDown(KeyEvent.VK_DOWN) || this.isKeyDown(KeyEvent.VK_S)) {
+			return true;
+		}
+		return false;
+	}
 }

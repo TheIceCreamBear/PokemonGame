@@ -14,14 +14,24 @@ import javax.swing.JTextField;
 import com.theicecreambear.gameobject.GameObject;
 import com.theicecreambear.gameobject.StaticObject;
 import com.theicecreambear.gameobject.UpdateableObject;
+import com.theicecreambear.interfaces.Drawable;
 import com.theicecreambear.item.Item;
 import com.theicecreambear.player.OverworldPosition;
 import com.theicecreambear.player.Player;
 import com.theicecreambear.player.WorldPosition;
 import com.theicecreambear.refrence.Refrence;
 import com.theicecreambear.screen.Screen;
+import com.theicecreambear.tiles.Tile;
 
+/**
+ * 
+ * @author Joseph Terribile
+ * @author David Santamaria
+ *
+ */
 public class GameEngine {
+	
+	public RenderState state;
 	
 	public static boolean running = true;
 	public static GameEngine instance;
@@ -37,21 +47,25 @@ public class GameEngine {
 	private boolean consoleShowing;
 	
 	/* The three types of Game Objects */
+	// 8/29/16 TODO possibly make these maps, idk
 	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
 	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();
-	static ArrayList<StaticObject> statics = new ArrayList<StaticObject>();
+	static ArrayList<Drawable> drawable = new ArrayList<Drawable>();
 	
 	/**
 	 * @deprecated - This method may get to be removed in the final export of the game so that 
-	 * {@code Main.main()} will be invoked when executing the exported .jar
+	 * {@link com.theicecreambear.Main#main(String[]) Main.main()} will be invoked when executing 
+	 * the exported .jar file.
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		instance = new GameEngine();
+		System.out.println(Runtime.getRuntime().maxMemory());
+		System.err.println("x: " + Screen.width + "y: " + Screen.height);
+		new GameEngine();
 	}
 	
 	public static void startGameEngine(String[] args) {
-		instance = new GameEngine();
+		new GameEngine();
 	}
 	
 	public GameEngine() {
@@ -60,6 +74,8 @@ public class GameEngine {
 	}
 
 	public void initialize() {
+		this.state = RenderState.NORMAL_MAP;
+		
 		frame = new JFrame("Pokemon Remastered (PC indev)");
 		frame.setBounds(0,0, Screen.width, Screen.height);
 		frame.setVisible(true);
@@ -80,6 +96,9 @@ public class GameEngine {
 		// TODO
 		p1 = new Player(new OverworldPosition(0,0), new WorldPosition(0,0), new ArrayList<Item>(), true, frame);
 		updateableAndDrawable.add(p1);
+		
+//		Tile tile = new Tile();
+//		drawable.add(tile);
 		
 		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
 		g2 = i.createGraphics();
@@ -106,7 +125,7 @@ public class GameEngine {
 		for(GameObject gameObject : updateableAndDrawable) {
 			gameObject.draw(g2, observer);
 		}
-		for(StaticObject staject : statics) {
+		for(Drawable staject : drawable) {
 			staject.draw(g, observer);
 		}
 		g2.setColor(Color.GREEN);
@@ -118,6 +137,8 @@ public class GameEngine {
 
 	/**
 	 * THIS IS BAD CODE PLACEMENT AND ORGANIZATION AND IM SORRY, BUT IM TRYING THINGS
+	 * 
+	 * THIS WORKS BUT I HAVENT MOVED IT BACK YET
 	 */
 	public int ticks;
 	
@@ -175,7 +196,9 @@ public class GameEngine {
 				fps = 0;
 				p1.isInMovingPlus = false;
 				p1.isInMovingMinus = false;
+				System.out.println(Runtime.getRuntime().freeMemory());
 				System.gc();
+				System.out.println(Runtime.getRuntime().freeMemory());
 			}
 		}
 	}
@@ -196,5 +219,13 @@ public class GameEngine {
 		consoleShowing = false;
 		frame.remove(consoleReadout);
 		frame.remove(consoleIn);
+	}
+	
+	public enum RenderState {
+		NORMAL_MAP,
+		BATTLE,
+		BAG;
+		
+		
 	}
 }

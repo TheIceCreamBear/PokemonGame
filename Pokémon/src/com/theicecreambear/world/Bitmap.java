@@ -21,13 +21,13 @@ public class Bitmap implements Drawable {
 	public void initMap() {
 		for(int i = 0; i < MAX_X; i++) {
 			for(int j = 0; j < MAX_Y; j++) {
-				map[i][j] = new Tile(i % 3);
+				map[i][j] = new Tile(i % 3, 0, 0);
 			}
 		}
 	}
 	// TODO find amount of tiles in overworld map
-	public final int MAX_X = Screen.width / Tile.width;
-	public final int MAX_Y = Screen.height / Tile.height;
+	public final int MAX_X = Screen.width / Tile.TILE_WIDTH;
+	public final int MAX_Y = Screen.height / Tile.TILE_HEIGHT;
 
 	@Override
 	public void draw(Graphics g, ImageObserver observer) {

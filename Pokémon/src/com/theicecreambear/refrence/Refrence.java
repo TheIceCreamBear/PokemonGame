@@ -7,11 +7,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Refrence {
+	
+	public static final String DIRPREFIX = System.getProperty("user.dir");
+	
 	public static final String PLAYER_SPRITES = "resources/sprites/player/";
 	public static final String PLAYER_STILL = "resources/sprites/player/still/";
 	public static final String PLAYER_WALKING_RIGHT = "resources/sprites/player/walking/right/";
 	public static final String PLAYER_WALKING_LEFT = "resources/sprites/player/walking/left/";
-	public static final String TILES = "resources/tiles/";
+	public static final String TILES = "resources/tiles/tile";
 	public static final String GUI_IMAGES = "resources/gui/";
 	public static final String TILE_MAP_SHEET = "resources/tiles/test_player_movement.png";
 	public static Image tileMap;
@@ -20,6 +23,7 @@ public class Refrence {
 			tileMap = ImageIO.read(new File(TILE_MAP_SHEET));
 		} catch (IOException e) {
 			e.printStackTrace();
+			Math.random();
 		}
 	}
 }

@@ -74,6 +74,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 	@Override
 	public void update(double deltaTime) {
+		this.lastTick = this.localTicks;
 		this.localTicks++;
 		
 		
@@ -93,15 +94,20 @@ public class Player extends GameObject implements Drawable, Updateable {
 		if (GameEngine.instance.isConsoleShowing()) {
 			return;
 		}
-
-		if (!(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)
-				|| handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)
-				|| handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)
-				|| handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S))) {
-			isStill = true;
-		} else {
-			isStill = false;
+		
+		if (!handler.isMoveKeyDown()) {
+			this.localTicks = 0;
 		}
+
+//		if (!(handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)
+//				|| handler.isKeyDown(KeyEvent.VK_LEFT) || handler.isKeyDown(KeyEvent.VK_A)
+//				|| handler.isKeyDown(KeyEvent.VK_UP) || handler.isKeyDown(KeyEvent.VK_W)
+//				|| handler.isKeyDown(KeyEvent.VK_DOWN) || handler.isKeyDown(KeyEvent.VK_S))) {
+//			isStill = true;
+//		} else {
+//			isStill = false;
+//		}
+		
 		isRunning = isStill ? false : handler.isKeyDown(KeyEvent.VK_SHIFT) /*&& this.bag.contains(Items.runningShoes)*/ ? true : false;
 
 		switch (direction) {
@@ -111,10 +117,11 @@ public class Player extends GameObject implements Drawable, Updateable {
 		case "right":
 		}
 		
-
+		// TODO isOnlyKeyDown
 		if (((handler.isKeyDown(KeyEvent.VK_RIGHT) || handler.isKeyDown(KeyEvent.VK_D)) && !isOtherMoveKeyDown(KeyEvent.VK_D))/* || isInMoving*/) {
 			isInMovingPlus = true;
 			if (isRunning) {
+				// TODO test how % 60 works for this
 				if (this.localTicks == 15) {
 					wp.x += 11;
 					rightFootOut = !rightFootOut;
@@ -126,7 +133,7 @@ public class Player extends GameObject implements Drawable, Updateable {
 					isStill = true;
 				}
 				
-				if (this.localTicks == 45) {   // TODO - Possibly make a local tics to the player class and increase it by one every update() call
+				if (this.localTicks == 45) {
 					wp.x += 11;
 					rightFootOut = !rightFootOut;
 					isStill = false;
@@ -287,12 +294,14 @@ public class Player extends GameObject implements Drawable, Updateable {
 				if (this.localTicks == 60) {
 					wp.x += 11;
 					isStill = true;
+					this.localTicks = 0;
 				}
 			}
 			if (wp.y % 22 == 11) {
 				if (this.localTicks == 60) {
 					wp.y += 11;
 					isStill = true;
+					this.localTicks = 0;
 				}
 			}
 		}
@@ -301,12 +310,14 @@ public class Player extends GameObject implements Drawable, Updateable {
 				if (this.localTicks == 60) {
 					wp.x -= 11;
 					isStill = true;
+					this.localTicks = 0;
 				}
 			}
 			if (wp.y % 22 == 11) {
 				if (this.localTicks == 60) {
 					wp.y -= 11;
 					isStill = true;
+					this.localTicks = 0;
 				}
 			}
 		}
@@ -466,6 +477,13 @@ public class Player extends GameObject implements Drawable, Updateable {
 			System.err.println("One or more player sprites don't exist");
 			e.printStackTrace();
 		}
+		
+		System.gc();
+	}
+	
+	private boolean isOnlyKeyDown(int keyNum) {
+		
+		return false;
 	}
 
 	/**

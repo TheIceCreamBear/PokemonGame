@@ -2,7 +2,7 @@ package com.theicecreambear.player;
 
 import com.theicecreambear.screen.Screen;
 
-public class WorldPosition extends Position {
+public class WorldPosition extends Position implements Cloneable {
 
 	public int x;
 	public int y;
@@ -21,7 +21,23 @@ public class WorldPosition extends Position {
 		this(0,0);
 	}
 	
-	public String toString() {
-		return "x: " + x + " %: " + x % 22 +" y: " + y + " %: " + y % 22;
+	public WorldPosition(OverworldPosition pos) {
+		this(pos.x * 22, pos.y * 22);
 	}
+	
+	public String toString() {
+		return "WP=x: " + x + " %: " + x % 22 + " y: " + y + " %: " + y % 22;
+	}
+	
+	public boolean equals(WorldPosition pos) {
+		if (this.x == pos.x && this.y == pos.y) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Object clone() {
+		return new WorldPosition(x, y);
+	}
+	
 }
