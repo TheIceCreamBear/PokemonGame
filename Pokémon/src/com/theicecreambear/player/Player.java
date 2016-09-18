@@ -23,7 +23,7 @@ import com.theicecreambear.item.Item;
 import com.theicecreambear.item.Items;
 import com.theicecreambear.refrence.Refrence;
 
-public class Player extends GameObject implements Drawable, Updateable {
+public class Player extends GameObject {
 
 	public BufferedImage[] playerWalkingSprites;
 	
@@ -457,25 +457,32 @@ public class Player extends GameObject implements Drawable, Updateable {
 
 	private void initPlayerWalkingSprites() {
 		playerWalkingSprites = new BufferedImage[12];
-		try {
-			playerWalkingSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + "up.png"));
-			playerWalkingSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + "down.png"));
-			playerWalkingSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + "left.png"));
-			playerWalkingSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + "right.png"));
-
-			playerWalkingSprites[4] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "up.png"));
-			playerWalkingSprites[5] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "down.png"));
-			playerWalkingSprites[6] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "left.png"));
-			playerWalkingSprites[7] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + "right.png"));
-
-			playerWalkingSprites[8] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "up.png"));
-			playerWalkingSprites[9] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "down.png"));
-			playerWalkingSprites[10] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "left.png"));
-			playerWalkingSprites[11] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + "right.png"));
-
-		} catch (IOException e) {
-			System.err.println("One or more player sprites don't exist");
-			e.printStackTrace();
+		if (male) {
+			final String m = "male_";
+			try {
+				playerWalkingSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "up.png"));
+				playerWalkingSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "down.png"));
+				playerWalkingSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "left.png"));
+				playerWalkingSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "right.png"));
+				
+				playerWalkingSprites[4] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "up.png"));
+				playerWalkingSprites[5] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "down.png"));
+				playerWalkingSprites[6] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "left.png"));
+				playerWalkingSprites[7] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "right.png"));
+				
+				playerWalkingSprites[8] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "up.png"));
+				playerWalkingSprites[9] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "down.png"));
+				playerWalkingSprites[10] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "left.png"));
+				playerWalkingSprites[11] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "right.png"));
+				
+			} catch (IOException e) {
+				System.err.println("One or more male player sprites don't exist");
+				e.printStackTrace();
+			}			
+		} else {
+			//TODO
+			final String f = "female_";
+			
 		}
 		
 		System.gc();

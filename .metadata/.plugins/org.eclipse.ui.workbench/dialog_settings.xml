@@ -32,6 +32,11 @@
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="G:\Pokémon\src\com\theicecreambear\tiles"/>
+			<item value="G:\Pokémon\src\com\theicecreambear\refrence"/>
+			<item value="G:\Pokémon\src\com\theicecreambear\player"/>
+			<item value="G:\Pokémon\src\com\theicecreambear\gameobject"/>
+			<item value="G:\Pokémon\src\com\theicecreambear\engine"/>
 			<item value="F:\PkMn Game\Pokémon\src"/>
 			<item value="C:\Users\Joseph\workspace\Pokemon\src\item"/>
 			<item value="C:\Users\Joseph\workspace\Pokemon\src\world"/>

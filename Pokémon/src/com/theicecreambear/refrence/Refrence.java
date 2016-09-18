@@ -17,13 +17,24 @@ public class Refrence {
 	public static final String TILES = "resources/tiles/tile";
 	public static final String GUI_IMAGES = "resources/gui/";
 	public static final String TILE_MAP_SHEET = "resources/tiles/test_player_movement.png";
-	public static Image tileMap;
 	static {
 		try {
-			tileMap = ImageIO.read(new File(TILE_MAP_SHEET));
+			Maps.tileMap = ImageIO.read(new File(TILE_MAP_SHEET));
 		} catch (IOException e) {
 			e.printStackTrace();
 			Math.random();
+		}
+	}
+	
+	public static class Maps {
+		public static Image tileMap;
+		static {
+			try {
+				tileMap = ImageIO.read(new File(TILE_MAP_SHEET));
+			} catch (IOException e) {
+				e.printStackTrace();
+				Math.random();
+			}
 		}
 	}
 }

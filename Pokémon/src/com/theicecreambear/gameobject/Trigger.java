@@ -14,11 +14,18 @@ public class Trigger extends UpdateableObject {
 		
 		event();
 	}
+	
 	public void update() {
 		
 	}
 	
 	public void event() {
+		
+	}
+
+	@Override
+	public void update(double deltaTime) {
+		// TODO Auto-generated method stub
 		
 	}
 }

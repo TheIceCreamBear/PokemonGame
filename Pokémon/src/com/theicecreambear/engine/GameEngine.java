@@ -12,16 +12,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.theicecreambear.gameobject.GameObject;
-import com.theicecreambear.gameobject.StaticObject;
-import com.theicecreambear.gameobject.UpdateableObject;
 import com.theicecreambear.interfaces.Drawable;
+import com.theicecreambear.interfaces.Updateable;
 import com.theicecreambear.item.Item;
 import com.theicecreambear.player.OverworldPosition;
 import com.theicecreambear.player.Player;
 import com.theicecreambear.player.WorldPosition;
 import com.theicecreambear.refrence.Refrence;
 import com.theicecreambear.screen.Screen;
-import com.theicecreambear.tiles.Tile;
 
 /**
  * 
@@ -49,7 +47,7 @@ public class GameEngine {
 	/* The three types of Game Objects */
 	// 8/29/16 TODO possibly make these maps, idk
 	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
-	static ArrayList<UpdateableObject> updateable = new ArrayList<UpdateableObject>();
+	static ArrayList<Updateable> updateable = new ArrayList<Updateable>();
 	static ArrayList<Drawable> drawable = new ArrayList<Drawable>();
 	
 	/**
@@ -97,8 +95,6 @@ public class GameEngine {
 		p1 = new Player(new OverworldPosition(0,0), new WorldPosition(0,0), new ArrayList<Item>(), true, frame);
 		updateableAndDrawable.add(p1);
 		
-//		Tile tile = new Tile();
-//		drawable.add(tile);
 		
 		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
 		g2 = i.createGraphics();
@@ -112,7 +108,7 @@ public class GameEngine {
 			gameObject.update(deltaTime);
 		}
 		
-		for(UpdateableObject upject : updateable) {
+		for(Updateable upject : updateable) {
 			upject.update(deltaTime);
 		}
 	}
@@ -120,7 +116,7 @@ public class GameEngine {
 	public void render(Graphics g, ImageObserver observer) {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 0, Screen.width, Screen.height);
-		g2.drawImage(Refrence.tileMap, 0, 0, frame);
+		g2.drawImage(Refrence.Maps.tileMap, 0, 0, frame);
 		
 		for(GameObject gameObject : updateableAndDrawable) {
 			gameObject.draw(g2, observer);

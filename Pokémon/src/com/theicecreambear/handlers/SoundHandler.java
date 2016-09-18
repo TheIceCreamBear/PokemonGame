@@ -17,14 +17,9 @@ public class SoundHandler {
 	public boolean running = true;
 
 	public static final int INTRO = 0;
-	public static final int AIRHORN = 2;
-	public static final int WILHELM = 3;
-	public static final int SUPRISE_MOTHER_FUCKER = 4;
+
 	
-	public static final int CREW_REMIX = 100;
-	public static final int CREW_REMIX_INS = 101;
-	
-	public static SoundHandler handler;
+	public static SoundHandler instance;
 	
 	private static String dirPrefix;
 	
@@ -38,7 +33,7 @@ public class SoundHandler {
 	
 	public SoundHandler(String dirPrefixIn) {
 		dirPrefix = dirPrefixIn;
-		handler = this;
+		instance = this;
 	}
 	
 	public void playSound(int id) {
@@ -72,7 +67,7 @@ public class SoundHandler {
 		} else {
 			new SoundHandler();
 		}
-		return handler;
+		return instance;
 	}
 	
 	public void loopHandler() {
