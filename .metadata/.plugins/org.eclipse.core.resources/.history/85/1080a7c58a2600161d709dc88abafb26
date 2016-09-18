@@ -1,7 +1,0 @@
-package com.theicecreambear.gameobject;
-
-public class Trigger extends UpdateableObject {
-	public void update(double deltaTime) {
-		
-	}
-}
