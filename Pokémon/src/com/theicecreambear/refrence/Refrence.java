@@ -1,6 +1,7 @@
 package com.theicecreambear.refrence;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -36,5 +37,12 @@ public class Refrence {
 				Math.random();
 			}
 		}
+	}
+	
+	public static class PlayerRef {
+		public static final int PLAYER_UP = KeyEvent.VK_W;
+		public static final int PLAYER_DOWN = KeyEvent.VK_S;
+		public static final int PLAYER_LEFT = KeyEvent.VK_A;
+		public static final int PLAYER_RIGHT = KeyEvent.VK_D;
 	}
 }

@@ -8,8 +8,6 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import com.theicecreambear.gameobject.GameObject;
 import com.theicecreambear.interfaces.Drawable;
@@ -39,10 +37,6 @@ public class GameEngine {
 	public Graphics g2;
 	public BufferedImage i;
 	private Player p1;
-	
-	private JTextArea consoleReadout;
-	private JTextField consoleIn;
-	private boolean consoleShowing;
 	
 	/* The three types of Game Objects */
 	// 8/29/16 TODO possibly make these maps, idk
@@ -79,18 +73,6 @@ public class GameEngine {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		consoleReadout = new JTextArea(); 
-		consoleReadout.setEditable(false);
-		consoleReadout.setBounds(0, 0, 600, 400);
-		consoleReadout.setBorder(null);
-		consoleReadout.setRows(10);
-		
-		consoleIn = new JTextField();
-		consoleIn.setBounds(0, 401, 600, 30);
-		consoleIn.setBorder(null);
-		consoleIn.setEditable(true);
-		
-		
 		// TODO
 		p1 = new Player(new OverworldPosition(0,0), new WorldPosition(0,0), new ArrayList<Item>(), true, frame);
 		updateableAndDrawable.add(p1);
@@ -118,6 +100,7 @@ public class GameEngine {
 		g2.fillRect(0, 0, Screen.width, Screen.height);
 		g2.drawImage(Refrence.Maps.tileMap, 0, 0, frame);
 		
+		
 		for(GameObject gameObject : updateableAndDrawable) {
 			gameObject.draw(g2, observer);
 		}
@@ -131,19 +114,12 @@ public class GameEngine {
 		g.drawImage(i, 0, 0, frame);
 	}
 
-	/**
-	 * THIS IS BAD CODE PLACEMENT AND ORGANIZATION AND IM SORRY, BUT IM TRYING THINGS
-	 * 
-	 * THIS WORKS BUT I HAVENT MOVED IT BACK YET
-	 */
-	public int ticks;
-	
 	public void run() {
 		long time = System.nanoTime();
 		final double tick = 60.0;
 		double ms = 1000000000 / tick;
 		double deltaTime = 0;
-		ticks = 0;
+		int ticks = 0;
 		int fps = 0;
 		long timer = System.currentTimeMillis();
 		long frameLimit = 80;
@@ -163,7 +139,7 @@ public class GameEngine {
 				deltaTime--;
 			}
 			
-			render(g, frame);
+			render(g, frame); // TODO make like the non cpu/gpu locked tron game.
 			fps++;
 			
 			while(deltaTime < frameLimit) {
@@ -190,8 +166,6 @@ public class GameEngine {
 				System.out.println(stats);
 				ticks = 0;
 				fps = 0;
-				p1.isInMovingPlus = false;
-				p1.isInMovingMinus = false;
 				System.out.println(Runtime.getRuntime().freeMemory());
 				System.gc();
 				System.out.println(Runtime.getRuntime().freeMemory());
@@ -199,29 +173,14 @@ public class GameEngine {
 		}
 	}
 
-	public boolean isConsoleShowing() {
-		return consoleShowing;
-	}
-
-	public void showConsole() {
-		consoleShowing = true;
-		frame.add(consoleReadout);
-		frame.add(consoleIn);
-		// TODO Possibly stop pause engine if console is showing?
-		
-	}
-	
-	public void hideConsole() {
-		consoleShowing = false;
-		frame.remove(consoleReadout);
-		frame.remove(consoleIn);
-	}
-	
 	public enum RenderState {
 		NORMAL_MAP,
+		CONSOLE,
 		BATTLE,
 		BAG;
-		
+	}
+	
+	private void drawMap() {
 		
 	}
 }
