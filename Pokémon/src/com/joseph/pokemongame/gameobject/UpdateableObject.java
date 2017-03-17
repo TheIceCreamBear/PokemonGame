@@ -1,7 +1,7 @@
 package com.joseph.pokemongame.gameobject;
 
-import com.joseph.pokemongame.interfaces.Updateable;
+import com.joseph.pokemongame.interfaces.IUpdateable;
 
-public abstract class UpdateableObject extends GenericObject implements Updateable {
+public abstract class UpdateableObject extends GenericObject implements IUpdateable {
 
 }

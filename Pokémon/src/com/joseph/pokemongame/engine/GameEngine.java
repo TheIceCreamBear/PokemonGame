@@ -9,38 +9,45 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import com.joseph.pokemongame.gameobject.GameObject;
-import com.joseph.pokemongame.interfaces.Drawable;
-import com.joseph.pokemongame.interfaces.Updateable;
+import com.joseph.pokemongame.gameobject.locks.RenderLockObject;
+import com.joseph.pokemongame.gui.IGuiOverlay;
+import com.joseph.pokemongame.interfaces.IDrawable;
+import com.joseph.pokemongame.interfaces.IUpdateable;
 import com.joseph.pokemongame.item.Item;
-import com.joseph.pokemongame.player.OverworldPosition;
+import com.joseph.pokemongame.player.TilePosition;
 import com.joseph.pokemongame.player.Player;
 import com.joseph.pokemongame.refrence.Refrence;
 import com.joseph.pokemongame.screen.Screen;
+import com.joseph.pokemongame.threads.RenderThread;
 
 /**
  * 
- * @author Joseph Terribile
- * @author David Santamaria
+ * @author Joseph Terribile - Current Maintainer
+ * @author David Santamaria - Original Author
  *
  */
 public class GameEngine {
+	private RenderState state;
 	
-	public RenderState state;
-	
-	public static boolean running = true;
-	public static GameEngine instance;
-	public static String stats = "";
-	public JFrame frame;
-	public Graphics g;
-	public Graphics g2;
-	public BufferedImage i;
+	private static boolean running = true;
+	private static GameEngine instance;
+	private static String stats = "";
+	private JFrame frame;
+	private Graphics g;
+	private Graphics g2;
+	private BufferedImage i;
 	private Player p1;
 	
+	private RenderThread renderThread;
+	private RenderLockObject rlo;
+	
 	/* The three types of Game Objects */
-	// 8/29/16 TODO possibly make these maps, idk
+	// 8/29/2016 TODO possibly make these maps, idk
+	// TODO static? 3/16/2017
 	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
-	static ArrayList<Updateable> updateable = new ArrayList<Updateable>();
-	static ArrayList<Drawable> drawable = new ArrayList<Drawable>();
+	static ArrayList<IUpdateable> updateable = new ArrayList<IUpdateable>();
+	static ArrayList<IDrawable> drawable = new ArrayList<IDrawable>();
+	private static ArrayList<IGuiOverlay> guiElements = new ArrayList<IGuiOverlay>();
 	
 	/**
 	 * @deprecated - This method may get to be removed in the final export of the game so that 
@@ -52,36 +59,40 @@ public class GameEngine {
 		// -Xms 1024m -Xmx 2048m
 		System.out.println(Runtime.getRuntime().maxMemory());
 		System.err.println("x: " + Screen.width + "y: " + Screen.height);
-		new GameEngine();
+		instance = new GameEngine();
+		instance.run();
+		Thread.currentThread().setName("EngineUpdateThread1");
 	}
 	
 	public static void startGameEngine(String[] args) {
-		new GameEngine();
+		instance = new GameEngine();
+		instance.run();
 	}
 	
 	public GameEngine() {
 		initialize();
-		run();
 	}
 
 	public void initialize() {
 		this.state = RenderState.NORMAL_MAP;
 		
-		frame = new JFrame("Pokemon Remastered (PC indev)");
-		frame.setBounds(0,0, Screen.width, Screen.height);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.rlo = new RenderLockObject();
+		this.renderThread = new RenderThread("RenderThread", this.rlo, this);
+		this.renderThread.start();
+		
+		this.frame = new JFrame("Pokemon Remastered (PC indev)");
+		this.frame.setBounds(0, 0, Screen.width, Screen.height);
+		this.frame.setVisible(true);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// TODO
-		p1 = new Player(new OverworldPosition(0,0), new ArrayList<Item>(), true, frame);
-		updateableAndDrawable.add(p1);
+		this.p1 = new Player(new TilePosition(10, 10), new ArrayList<Item>(), true, this.frame);
+		updateableAndDrawable.add(this.p1);
 		
 		
-		i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
-		g2 = i.createGraphics();
-		g = frame.getGraphics();
-		
-		instance = this;
+		this.i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
+		this.g2 = this.i.createGraphics();
+		this.g = this.frame.getGraphics();
 	}
 
 	public void update(double deltaTime) {
@@ -89,31 +100,37 @@ public class GameEngine {
 			gameObject.update(deltaTime);
 		}
 		
-		for(Updateable upject : updateable) {
+		for(IUpdateable upject : updateable) {
 			upject.update(deltaTime);
 		}
 	}
 
 	public void render(Graphics g, ImageObserver observer) {
-		g2.setColor(Color.BLACK);
-		g2.fillRect(0, 0, Screen.width, Screen.height);
-		g2.drawImage(Refrence.Maps.tileMap, 0, 0, frame);
+		this.g2.setColor(Color.BLACK);
+		this.g2.fillRect(0, 0, Screen.width, Screen.height);
+		this.g2.drawImage(Refrence.Maps.tileMap, 0, 0, this.frame);
 		
-		
-		for(GameObject gameObject : updateableAndDrawable) {
+		for (GameObject gameObject : updateableAndDrawable) {
 			gameObject.draw(g2, observer);
 		}
-		for(Drawable staject : drawable) {
+		
+		for (IDrawable staject : drawable) {
 			staject.draw(g, observer);
 		}
-		g2.setColor(Color.GREEN);
-		g2.setFont(Refrence.DEBUG_TEXT_FONT);
-		g2.drawString(stats, 25, 60);
 		
-		g.drawImage(i, 0, 0, frame);
+		for (IGuiOverlay gui : guiElements) {
+			gui.draw(g, observer);
+		}
+		
+		this.g2.setColor(Color.GREEN);
+		this.g2.setFont(Refrence.DEBUG_TEXT_FONT);
+		this.g2.drawString(stats, 25, 60);
+		
+		g.drawImage(this.i, 0, 0, this.frame);
 	}
 
 	public void run() {
+		// TODO THREAD SECURITY, ONLY THE MAIN THRAD SHOULD CALL THIS AND ONLY THIS CLASS
 		long time = System.nanoTime();
 		final double tick = 60.0;
 		double ms = 1000000000 / tick;
@@ -138,7 +155,11 @@ public class GameEngine {
 				deltaTime--;
 			}
 			
-			render(g, frame); // TODO make like the non cpu/gpu locked tron game.
+//			render(g, frame); // TODO make like the non cpu/gpu locked tron game.
+			synchronized (rlo) {
+				rlo.setWasNotified(true);
+				rlo.notify();
+			}
 			fps++;
 			
 			while(deltaTime < frameLimit) {
@@ -175,11 +196,39 @@ public class GameEngine {
 	public enum RenderState {
 		NORMAL_MAP,
 		CONSOLE,
-		BATTLE,
+		BATTLE, 
 		BAG;
 	}
 	
 	private void drawMap() {
 		
+	}
+	
+	public JFrame getFrame() {
+		return this.frame;
+	}
+	
+	public Graphics getG() {
+		return this.g;
+	}
+	
+	public Graphics getG2() {
+		return this.g2;
+	}
+	
+	public BufferedImage getI() {
+		return this.i;
+	}
+	
+	public RenderState getState() {
+		return this.state;
+	}
+	
+	public static GameEngine getInstance() {
+		return instance;
+	}
+	
+	public static boolean isRunning() {
+		return running;
 	}
 }

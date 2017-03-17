@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Refrence {
+	public static boolean DEBUG_MODE = false;
 	
 	public static final Font DEBUG_TEXT_FONT = new Font("Arial", 1, 20);
 	

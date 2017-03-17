@@ -1,8 +1,8 @@
 package com.joseph.pokemongame.gameobject;
 
-import com.joseph.pokemongame.interfaces.Drawable;
-import com.joseph.pokemongame.interfaces.Updateable;
+import com.joseph.pokemongame.interfaces.IDrawable;
+import com.joseph.pokemongame.interfaces.IUpdateable;
 
-public abstract class GameObject extends GenericObject implements Drawable, Updateable {
+public abstract class GameObject extends GenericObject implements IDrawable, IUpdateable {
 	
 }

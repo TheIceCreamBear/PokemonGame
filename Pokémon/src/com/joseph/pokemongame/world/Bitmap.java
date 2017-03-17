@@ -3,11 +3,11 @@ package com.joseph.pokemongame.world;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
-import com.joseph.pokemongame.interfaces.Drawable;
+import com.joseph.pokemongame.interfaces.IDrawable;
 import com.joseph.pokemongame.screen.Screen;
 import com.joseph.pokemongame.tiles.Tile;
 
-public class Bitmap implements Drawable {
+public class Bitmap implements IDrawable {
 	
 	/*
 	 * Worldmap = something
