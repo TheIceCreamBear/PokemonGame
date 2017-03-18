@@ -1,4 +1,4 @@
-package com.joseph.pokemongame.refrence;
+package com.joseph.pokemongame.reference;
 
 import java.awt.event.KeyEvent;
 

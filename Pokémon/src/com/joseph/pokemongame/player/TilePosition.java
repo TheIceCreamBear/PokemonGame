@@ -21,7 +21,7 @@ public class TilePosition {
 	}
 	
 	public TilePosition() {
-		this(0,0);
+		this(0, 0);
 	}
 	
 	public int getPixelX() {

@@ -47,7 +47,6 @@ public class Engine {
 	
 	private Thread soundThread;
 	
-	
 	public static void initOldEngine(String[] args) {
 		new Engine();
 	}

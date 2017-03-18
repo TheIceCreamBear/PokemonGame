@@ -1,4 +1,4 @@
-package com.joseph.pokemongame.refrence;
+package com.joseph.pokemongame.reference;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Refrence {
+public class Reference {
 	public static boolean DEBUG_MODE = false;
 	
 	public static final Font DEBUG_TEXT_FONT = new Font("Arial", 1, 20);
@@ -26,7 +26,7 @@ public class Refrence {
 	public static final String TILE_MAP_SHEET = "resources/tiles/test_player_movement.png";
 	static {
 		try {
-			Maps.tileMap = ImageIO.read(new File(TILE_MAP_SHEET));
+			Maps.TILE_MAP = ImageIO.read(new File(TILE_MAP_SHEET));
 		} catch (IOException e) {
 			e.printStackTrace();
 			Math.random();
@@ -34,10 +34,10 @@ public class Refrence {
 	}
 	
 	public static class Maps {
-		public static Image tileMap;
+		public static Image TILE_MAP;
 		static {
 			try {
-				tileMap = ImageIO.read(new File(TILE_MAP_SHEET));
+				TILE_MAP = ImageIO.read(new File(TILE_MAP_SHEET));
 			} catch (IOException e) {
 				e.printStackTrace();
 				Math.random();

@@ -16,7 +16,7 @@ import com.joseph.pokemongame.gameobject.GameObject;
 import com.joseph.pokemongame.handlers.InputHandler;
 import com.joseph.pokemongame.item.InventoryItemGroup;
 import com.joseph.pokemongame.item.Item;
-import com.joseph.pokemongame.refrence.Refrence;
+import com.joseph.pokemongame.reference.Reference;
 
 public class Player extends GameObject {
 	
@@ -65,11 +65,11 @@ public class Player extends GameObject {
 		this.moveTicks = 0;
 		this.moveCycles = 0;
 		
-		this.upKey = Refrence.PlayerRef.PLAYER_UP;
-		this.downKey = Refrence.PlayerRef.PLAYER_DOWN;
-		this.rightKey = Refrence.PlayerRef.PLAYER_RIGHT;
-		this.leftKey = Refrence.PlayerRef.PLAYER_LEFT;
-		this.runKey = Refrence.PlayerRef.PLAYER_RUN;
+		this.upKey = Reference.PlayerRef.PLAYER_UP;
+		this.downKey = Reference.PlayerRef.PLAYER_DOWN;
+		this.rightKey = Reference.PlayerRef.PLAYER_RIGHT;
+		this.leftKey = Reference.PlayerRef.PLAYER_LEFT;
+		this.runKey = Reference.PlayerRef.PLAYER_RUN;
 	}
 	
 	public Player(TilePosition owp, Component c) {
@@ -88,7 +88,7 @@ public class Player extends GameObject {
 			System.exit(-1);
 		}
 		
-		if (Refrence.DEBUG_MODE) {
+		if (Reference.DEBUG_MODE) {
 			System.err.println(tilePos);
 		}
 		// if (handler.isKeyDown(keyCode)) {
@@ -110,37 +110,38 @@ public class Player extends GameObject {
 		if (male) {
 			final String m = "male_";
 			try {
-				this.playerWalkingSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "up.png"));
-				this.playerWalkingSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "down.png"));
-				this.playerWalkingSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "left.png"));
-				this.playerWalkingSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "right.png"));
+				this.playerWalkingSprites[0] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "up.png"));
+				this.playerWalkingSprites[1] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "down.png"));
+				this.playerWalkingSprites[2] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "left.png"));
+				this.playerWalkingSprites[3] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "right.png"));
 				
-				this.playerWalkingSprites[4] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "up.png"));
-				this.playerWalkingSprites[5] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "down.png"));
-				this.playerWalkingSprites[6] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "left.png"));
-				this.playerWalkingSprites[7] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + m + "right.png"));
+				this.playerWalkingSprites[4] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + m + "up.png"));
+				this.playerWalkingSprites[5] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + m + "down.png"));
+				this.playerWalkingSprites[6] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + m + "left.png"));
+				this.playerWalkingSprites[7] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + m + "right.png"));
 				
-				this.playerWalkingSprites[8] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "up.png"));
-				this.playerWalkingSprites[9] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "down.png"));
-				this.playerWalkingSprites[10] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "left.png"));
-				this.playerWalkingSprites[11] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + m + "right.png"));
+				this.playerWalkingSprites[8] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + m + "up.png"));
+				this.playerWalkingSprites[9] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + m + "down.png"));
+				this.playerWalkingSprites[10] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + m + "left.png"));
+				this.playerWalkingSprites[11] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + m + "right.png"));
 				
 				System.gc();
 				
-				this.playerRunningSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "up.png"));
-				this.playerRunningSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "down.png"));
-				this.playerRunningSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "left.png"));
-				this.playerRunningSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + m + "right.png"));
+				// TODO MAKE RUNNING SPRITES
+				this.playerRunningSprites[0] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "up.png"));
+				this.playerRunningSprites[1] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "down.png"));
+				this.playerRunningSprites[2] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "left.png"));
+				this.playerRunningSprites[3] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "right.png"));
 				
-				this.playerRunningSprites[4] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + m + "up.png"));
-				this.playerRunningSprites[5] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + m + "down.png"));
-				this.playerRunningSprites[6] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + m + "left.png"));
-				this.playerRunningSprites[7] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + m + "right.png"));
+				this.playerRunningSprites[4] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "up.png"));
+				this.playerRunningSprites[5] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "down.png"));
+				this.playerRunningSprites[6] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "left.png"));
+				this.playerRunningSprites[7] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "right.png"));
 				
-				this.playerRunningSprites[8] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + m + "up.png"));
-				this.playerRunningSprites[9] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + m + "down.png"));
-				this.playerRunningSprites[10] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + m + "left.png"));
-				this.playerRunningSprites[11] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + m + "right.png"));
+				this.playerRunningSprites[8] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "up.png"));
+				this.playerRunningSprites[9] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "down.png"));
+				this.playerRunningSprites[10] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "left.png"));
+				this.playerRunningSprites[11] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "right.png"));
 				
 			} catch (IOException e) {
 				System.err.println("One or more male player sprites don't exist");
@@ -150,37 +151,37 @@ public class Player extends GameObject {
 			// TODO make the female sprites
 			final String f = "female_";
 			try {
-				this.playerWalkingSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "up.png"));
-				this.playerWalkingSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "down.png"));
-				this.playerWalkingSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "left.png"));
-				this.playerWalkingSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "right.png"));
+				this.playerWalkingSprites[0] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "up.png"));
+				this.playerWalkingSprites[1] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "down.png"));
+				this.playerWalkingSprites[2] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "left.png"));
+				this.playerWalkingSprites[3] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "right.png"));
 				
-				this.playerWalkingSprites[4] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + f + "up.png"));
-				this.playerWalkingSprites[5] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + f + "down.png"));
-				this.playerWalkingSprites[6] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + f + "left.png"));
-				this.playerWalkingSprites[7] = ImageIO.read(new File(Refrence.PLAYER_WALKING_LEFT + f + "right.png"));
+				this.playerWalkingSprites[4] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + f + "up.png"));
+				this.playerWalkingSprites[5] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + f + "down.png"));
+				this.playerWalkingSprites[6] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + f + "left.png"));
+				this.playerWalkingSprites[7] = ImageIO.read(new File(Reference.PLAYER_WALKING_LEFT + f + "right.png"));
 				
-				this.playerWalkingSprites[8] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + f + "up.png"));
-				this.playerWalkingSprites[9] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + f + "down.png"));
-				this.playerWalkingSprites[10] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + f + "left.png"));
-				this.playerWalkingSprites[11] = ImageIO.read(new File(Refrence.PLAYER_WALKING_RIGHT + f + "right.png"));
+				this.playerWalkingSprites[8] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + f + "up.png"));
+				this.playerWalkingSprites[9] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + f + "down.png"));
+				this.playerWalkingSprites[10] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + f + "left.png"));
+				this.playerWalkingSprites[11] = ImageIO.read(new File(Reference.PLAYER_WALKING_RIGHT + f + "right.png"));
 				
 				System.gc();
 				
-				this.playerRunningSprites[0] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "up.png"));
-				this.playerRunningSprites[1] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "down.png"));
-				this.playerRunningSprites[2] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "left.png"));
-				this.playerRunningSprites[3] = ImageIO.read(new File(Refrence.PLAYER_STILL + f + "right.png"));
+				this.playerRunningSprites[0] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "up.png"));
+				this.playerRunningSprites[1] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "down.png"));
+				this.playerRunningSprites[2] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "left.png"));
+				this.playerRunningSprites[3] = ImageIO.read(new File(Reference.PLAYER_STILL + f + "right.png"));
 				
-				this.playerRunningSprites[4] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + f + "up.png"));
-				this.playerRunningSprites[5] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + f + "down.png"));
-				this.playerRunningSprites[6] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + f + "left.png"));
-				this.playerRunningSprites[7] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_LEFT + f + "right.png"));
+				this.playerRunningSprites[4] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + f + "up.png"));
+				this.playerRunningSprites[5] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + f + "down.png"));
+				this.playerRunningSprites[6] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + f + "left.png"));
+				this.playerRunningSprites[7] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + f + "right.png"));
 				
-				this.playerRunningSprites[8] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + f + "up.png"));
-				this.playerRunningSprites[9] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + f + "down.png"));
-				this.playerRunningSprites[10] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + f + "left.png"));
-				this.playerRunningSprites[11] = ImageIO.read(new File(Refrence.PLAYER_RUNNING_RIGHT + f + "right.png"));
+				this.playerRunningSprites[8] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + f + "up.png"));
+				this.playerRunningSprites[9] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + f + "down.png"));
+				this.playerRunningSprites[10] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + f + "left.png"));
+				this.playerRunningSprites[11] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + f + "right.png"));
 			} catch (IOException e) {
 				System.err.println("One or more male player sprites don't exist");
 				e.printStackTrace();
@@ -260,9 +261,9 @@ public class Player extends GameObject {
 		this.moveTicks++;
 		switch (this.moveCycles) {
 			case 0: // new Cycle
+				this.moveTicks = 0;
 				this.curentCycleDirection = this.getNewMoveDirection();
 				if (this.curentCycleDirection == EnumDirection.STILL) {
-					this.moveTicks = 0;
 					break;
 				}
 				if (this.isRunning) {
@@ -280,13 +281,11 @@ public class Player extends GameObject {
 				break;
 			case 2: // Beginning of cycle, does middle move
 				if (this.moveTicks >= 1 && this.moveTicks <= 15) {
-					if (this.curentCycleDirection != this.getNewMoveDirection()) {
-						this.moveTicks = 0;
+					this.facingDirection = this.curentCycleDirection;
+					if (this.curentCycleDirection != this.getNewMoveDirection()) { // TODO still
+//						this.moveTicks = 0;
 						this.moveCycles = 0;
 					}
-				}
-				if (this.moveTicks == 15) {
-					this.facingDirection = this.curentCycleDirection;
 				}
 				if (this.moveTicks == 30) {
 					this.rightFootOut = !this.rightFootOut;
@@ -303,13 +302,11 @@ public class Player extends GameObject {
 				break;
 			case 4: // Running version of cycle 2
 				if (this.moveTicks >= 1 && this.moveTicks <= 7) {
+					this.facingDirection = this.curentCycleDirection;
 					if (this.curentCycleDirection != this.getNewMoveDirection()) {
 						this.moveTicks = 0;
 						this.moveCycles = 0;
 					}
-				}
-				if (this.moveTicks == 7) {
-					this.facingDirection = this.curentCycleDirection;
 				}
 				if (this.moveTicks == 15) {
 					this.rightFootOut = !this.rightFootOut;

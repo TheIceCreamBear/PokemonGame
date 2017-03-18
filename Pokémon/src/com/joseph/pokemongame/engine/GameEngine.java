@@ -15,10 +15,11 @@ import com.joseph.pokemongame.interfaces.IDrawable;
 import com.joseph.pokemongame.interfaces.IUpdateable;
 import com.joseph.pokemongame.item.Item;
 import com.joseph.pokemongame.player.TilePosition;
+import com.joseph.pokemongame.reference.Reference;
 import com.joseph.pokemongame.player.Player;
-import com.joseph.pokemongame.refrence.Refrence;
 import com.joseph.pokemongame.screen.Screen;
 import com.joseph.pokemongame.threads.RenderThread;
+import com.joseph.pokemongame.threads.ShutdownThread;
 
 /**
  * 
@@ -27,7 +28,7 @@ import com.joseph.pokemongame.threads.RenderThread;
  *
  */
 public class GameEngine {
-	private RenderState state;
+	private EnumRenderState state;
 	
 	private static boolean running = true;
 	private static GameEngine instance;
@@ -38,21 +39,19 @@ public class GameEngine {
 	private BufferedImage i;
 	private Player p1;
 	
+	private ShutdownThread sDownThread;
 	private RenderThread renderThread;
 	private RenderLockObject rlo;
 	
 	/* The three types of Game Objects */
 	// 8/29/2016 TODO possibly make these maps, idk
 	// TODO static? 3/16/2017
-	static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
-	static ArrayList<IUpdateable> updateable = new ArrayList<IUpdateable>();
-	static ArrayList<IDrawable> drawable = new ArrayList<IDrawable>();
+	private static ArrayList<GameObject> updateableAndDrawable = new ArrayList<GameObject>();
+	private static ArrayList<IUpdateable> updateable = new ArrayList<IUpdateable>();
+	private static ArrayList<IDrawable> drawable = new ArrayList<IDrawable>();
 	private static ArrayList<IGuiOverlay> guiElements = new ArrayList<IGuiOverlay>();
 	
 	/**
-	 * @deprecated - This method may get to be removed in the final export of the game so that 
-	 * {@link com.theicecreambear.pokemongame.Main#main(String[]) Main.main()} will be invoked when executing 
-	 * the exported .jar file.
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -64,21 +63,24 @@ public class GameEngine {
 		Thread.currentThread().setName("EngineUpdateThread1");
 	}
 	
-	public static void startGameEngine(String[] args) {
-		instance = new GameEngine();
-		instance.run();
-	}
+//	public static void startGameEngine(String[] args) {
+//		instance = new GameEngine();
+//		instance.run();
+//	}
 	
 	public GameEngine() {
 		initialize();
 	}
 
 	public void initialize() {
-		this.state = RenderState.NORMAL_MAP;
+		this.sDownThread = new ShutdownThread("Shutdown");
+		Runtime.getRuntime().addShutdownHook(sDownThread);
 		
 		this.rlo = new RenderLockObject();
 		this.renderThread = new RenderThread("RenderThread", this.rlo, this);
 		this.renderThread.start();
+
+		this.state = EnumRenderState.NORMAL_MAP;
 		
 		this.frame = new JFrame("Pokemon Remastered (PC indev)");
 		this.frame.setBounds(0, 0, Screen.width, Screen.height);
@@ -108,7 +110,7 @@ public class GameEngine {
 	public void render(Graphics g, ImageObserver observer) {
 		this.g2.setColor(Color.BLACK);
 		this.g2.fillRect(0, 0, Screen.width, Screen.height);
-		this.g2.drawImage(Refrence.Maps.tileMap, 0, 0, this.frame);
+		this.g2.drawImage(Reference.Maps.TILE_MAP, 0, 0, this.frame);
 		
 		for (GameObject gameObject : updateableAndDrawable) {
 			gameObject.draw(g2, observer);
@@ -123,7 +125,7 @@ public class GameEngine {
 		}
 		
 		this.g2.setColor(Color.GREEN);
-		this.g2.setFont(Refrence.DEBUG_TEXT_FONT);
+		this.g2.setFont(Reference.DEBUG_TEXT_FONT);
 		this.g2.drawString(stats, 25, 60);
 		
 		g.drawImage(this.i, 0, 0, this.frame);
@@ -151,7 +153,7 @@ public class GameEngine {
 
 			if (deltaTime >= 1) {
 				ticks++;
-				update(deltaTime);
+				update(deltaTime); // TODO, multy threaded update
 				deltaTime--;
 			}
 			
@@ -193,7 +195,7 @@ public class GameEngine {
 		}
 	}
 
-	public enum RenderState {
+	public enum EnumRenderState {
 		NORMAL_MAP,
 		CONSOLE,
 		BATTLE, 
@@ -220,7 +222,7 @@ public class GameEngine {
 		return this.i;
 	}
 	
-	public RenderState getState() {
+	public EnumRenderState getState() {
 		return this.state;
 	}
 	
