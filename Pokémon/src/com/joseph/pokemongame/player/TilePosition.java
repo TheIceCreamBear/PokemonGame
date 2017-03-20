@@ -16,8 +16,8 @@ public class TilePosition {
 	public TilePosition(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.MAX_X = Screen.width / 11; // TODO add correct values
-		this.MAX_Y = Screen.height / 11;
+		this.MAX_X = Screen.WIDTH / 11; // TODO add correct values
+		this.MAX_Y = Screen.HEIGHT / 11;
 	}
 	
 	public TilePosition() {

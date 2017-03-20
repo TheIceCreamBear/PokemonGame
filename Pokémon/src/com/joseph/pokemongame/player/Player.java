@@ -83,17 +83,18 @@ public class Player extends GameObject {
 	@Override
 	public void update(double deltaTime) {
 		if (this.handler.isKeyDown(KeyEvent.VK_ESCAPE)) {
-			// TODO prompt for save, then exit properly.
 			// TODO THIS NEEDS TO BE REPLACED LATER IN DEVELOPMENT WITH A MENU
-			System.exit(-1);
+			// TODO Here or in InputHandler its self
+//			System.exit(-1);
 		}
 		
 		if (Reference.DEBUG_MODE) {
 			System.err.println(tilePos);
 		}
-		// if (handler.isKeyDown(keyCode)) {
-		// do bag
-		// }
+//		if (handler.isKeyDown(keyCode)) {
+//			show bag menu
+//			TODO here or in InputHandler
+//		}
 		
 		this.movePlayer();
 		this.changeRenderSprite();
@@ -132,16 +133,18 @@ public class Player extends GameObject {
 				this.playerRunningSprites[1] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "down.png"));
 				this.playerRunningSprites[2] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "left.png"));
 				this.playerRunningSprites[3] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "right.png"));
-				
-				this.playerRunningSprites[4] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "up.png"));
-				this.playerRunningSprites[5] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "down.png"));
-				this.playerRunningSprites[6] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "left.png"));
-				this.playerRunningSprites[7] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "right.png"));
-				
-				this.playerRunningSprites[8] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "up.png"));
-				this.playerRunningSprites[9] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "down.png"));
-				this.playerRunningSprites[10] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "left.png"));
-				this.playerRunningSprites[11] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "right.png"));
+				this.playerRunningSprites[3] = ImageIO.read(new File(Reference.PLAYER_STILL + m + "right.png"));
+
+//				
+//				this.playerRunningSprites[4] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "up.png"));
+//				this.playerRunningSprites[5] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "down.png"));
+//				this.playerRunningSprites[6] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "left.png"));
+//				this.playerRunningSprites[7] = ImageIO.read(new File(Reference.PLAYER_RUNNING_LEFT + m + "right.png"));
+//				
+//				this.playerRunningSprites[8] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "up.png"));
+//				this.playerRunningSprites[9] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "down.png"));
+//				this.playerRunningSprites[10] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "left.png"));
+//				this.playerRunningSprites[11] = ImageIO.read(new File(Reference.PLAYER_RUNNING_RIGHT + m + "right.png"));
 				
 			} catch (IOException e) {
 				System.err.println("One or more male player sprites don't exist");

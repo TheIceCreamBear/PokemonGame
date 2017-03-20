@@ -27,8 +27,8 @@ public class Bitmap implements IDrawable {
 	}
 	
 	// TODO find amount of tiles in overworld map
-	public final int MAX_X = Screen.width / Tile.TILE_WIDTH;
-	public final int MAX_Y = Screen.height / Tile.TILE_HEIGHT;
+	public final int MAX_X = Screen.WIDTH / Tile.TILE_WIDTH;
+	public final int MAX_Y = Screen.HEIGHT / Tile.TILE_HEIGHT;
 
 	@Override
 	public void draw(Graphics g, ImageObserver observer) {

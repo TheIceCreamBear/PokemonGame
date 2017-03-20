@@ -30,7 +30,7 @@ public class Starter {
 	
 	public Starter(String[] args) throws IOException {
 		frame = new JFrame("Pokemon Remastered (PC indev)");
-		frame.setBounds(0,0, Screen.width, Screen.height);
+		frame.setBounds(0,0, Screen.WIDTH, Screen.HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Icon icon = new ImageIcon(ImageIO.read(new File(Reference.GUI_IMAGES + "startbutton.png")));
@@ -72,7 +72,7 @@ public class Starter {
 		
 		icon = new ImageIcon(ImageIO.read(new File(Reference.GUI_IMAGES + "background.png")));
 		JLabel label = new JLabel("Temporay picture", icon, 0);
-		label.setBounds(0, 0, Screen.width, Screen.height);
+		label.setBounds(0, 0, Screen.WIDTH, Screen.HEIGHT);
 		frame.add(label);
 		
 		frame.setVisible(true);

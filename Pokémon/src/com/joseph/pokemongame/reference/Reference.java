@@ -9,9 +9,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Reference {
-	public static boolean DEBUG_MODE = false;
+	public static final boolean DEBUG_MODE = false;
 	
 	public static final Font DEBUG_TEXT_FONT = new Font("Arial", 1, 20);
+	public static final Font TEXT_BOX_FONT = new Font("Arial", 1, 20);
 	
 	public static final String DIRPREFIX = System.getProperty("user.dir");
 	
@@ -21,9 +22,11 @@ public class Reference {
 	public static final String PLAYER_WALKING_LEFT = "resources/sprites/player/walking/left/";
 	public static final String PLAYER_RUNNING_RIGHT = "resources/sprites/player/walking/right/";
 	public static final String PLAYER_RUNNING_LEFT = "resources/sprites/player/running/left/";
-	public static final String TILES = "resources/tiles/tile";
+	public static final String TILES = "resources/tiles/tile/";
 	public static final String GUI_IMAGES = "resources/gui/";
+	public static final String GUI_BACKGROUNDS = "resources/gui/backgrounds/";
 	public static final String TILE_MAP_SHEET = "resources/tiles/test_player_movement.png";
+	public static final String LARGE_MAP_SHEET = "resources/tiles/1kTileSquare.png";
 	static {
 		try {
 			Maps.TILE_MAP = ImageIO.read(new File(TILE_MAP_SHEET));
@@ -35,9 +38,12 @@ public class Reference {
 	
 	public static class Maps {
 		public static Image TILE_MAP;
+		public static Image LARGE_MAP;
 		static {
 			try {
 				TILE_MAP = ImageIO.read(new File(TILE_MAP_SHEET));
+				LARGE_MAP = ImageIO.read(new File(LARGE_MAP_SHEET));
+				System.gc();
 			} catch (IOException e) {
 				e.printStackTrace();
 				Math.random();

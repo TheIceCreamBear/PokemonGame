@@ -7,6 +7,7 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.joseph.pokemongame.gameobject.GameObject;
 import com.joseph.pokemongame.gameobject.locks.RenderLockObject;
@@ -29,6 +30,7 @@ import com.joseph.pokemongame.threads.ShutdownThread;
  */
 public class GameEngine {
 	private EnumRenderState state;
+	private IGuiOverlay openGui;
 	
 	private static boolean running = true;
 	private static GameEngine instance;
@@ -55,12 +57,21 @@ public class GameEngine {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		if (System.getProperty("sun.arch.data.model").contains("32")) {
+			JOptionPane.showMessageDialog(null, "This application does not support the 32 bit JVM, please upgrade to 64bit. The application will now exit.", "JVM Not Supported", JOptionPane.ERROR_MESSAGE);
+			System.exit(-1);
+		}
+		if (Reference.DEBUG_MODE) {
+			
+		}
 		// -Xms 1024m -Xmx 2048m
-		System.out.println(Runtime.getRuntime().maxMemory());
-		System.err.println("x: " + Screen.width + "y: " + Screen.height);
+		long mem = Runtime.getRuntime().maxMemory();
+		System.out.println(mem + "B");
+		System.out.println((mem / 1024 / 1024) + "MB");
+		System.err.println("x: " + (Screen.TILE_POS_WIDTH * 11) + "y: " + (Screen.HEIGHT * 11));
+		Thread.currentThread().setName("EngineUpdateThread1");
 		instance = new GameEngine();
 		instance.run();
-		Thread.currentThread().setName("EngineUpdateThread1");
 	}
 	
 //	public static void startGameEngine(String[] args) {
@@ -83,7 +94,7 @@ public class GameEngine {
 		this.state = EnumRenderState.NORMAL_MAP;
 		
 		this.frame = new JFrame("Pokemon Remastered (PC indev)");
-		this.frame.setBounds(0, 0, Screen.width, Screen.height);
+		this.frame.setBounds(0, 0, Screen.TILE_POS_WIDTH * 11, Screen.TILE_POS_HEIGHT * 11);
 		this.frame.setVisible(true);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -92,43 +103,47 @@ public class GameEngine {
 		updateableAndDrawable.add(this.p1);
 		
 		
-		this.i = new BufferedImage(Screen.width, Screen.height, BufferedImage.TYPE_INT_RGB);
+		this.i = new BufferedImage(Screen.TILE_POS_WIDTH * 11, Screen.TILE_POS_HEIGHT * 11, BufferedImage.TYPE_INT_RGB);
 		this.g2 = this.i.createGraphics();
 		this.g = this.frame.getGraphics();
 	}
 
 	public void update(double deltaTime) {
-		for(GameObject gameObject: updateableAndDrawable) {
-			gameObject.update(deltaTime);
-		}
-		
-		for(IUpdateable upject : updateable) {
-			upject.update(deltaTime);
+		switch (this.state) {
+			case BAG:
+				break;
+			case BATTLE:
+				break;
+			case CONSOLE:
+				break;
+			case GUI_OVERLAY:
+				updateGui(deltaTime);
+				break;
+			case NORMAL_MAP:
+				updateNormal(deltaTime);
+				break;
+			default:
+				break;
 		}
 	}
 
 	public void render(Graphics g, ImageObserver observer) {
-		this.g2.setColor(Color.BLACK);
-		this.g2.fillRect(0, 0, Screen.width, Screen.height);
-		this.g2.drawImage(Reference.Maps.TILE_MAP, 0, 0, this.frame);
-		
-		for (GameObject gameObject : updateableAndDrawable) {
-			gameObject.draw(g2, observer);
+		switch (this.state) {
+			case BAG:
+				break;
+			case BATTLE:
+				break;
+			case CONSOLE:
+				break;
+			case GUI_OVERLAY:
+				renderGui(g, observer);
+				break;
+			case NORMAL_MAP:
+				renderNormal(g, observer);
+				break;
+			default:
+				break;
 		}
-		
-		for (IDrawable staject : drawable) {
-			staject.draw(g, observer);
-		}
-		
-		for (IGuiOverlay gui : guiElements) {
-			gui.draw(g, observer);
-		}
-		
-		this.g2.setColor(Color.GREEN);
-		this.g2.setFont(Reference.DEBUG_TEXT_FONT);
-		this.g2.drawString(stats, 25, 60);
-		
-		g.drawImage(this.i, 0, 0, this.frame);
 	}
 
 	public void run() {
@@ -188,22 +203,76 @@ public class GameEngine {
 				System.out.println(stats);
 				ticks = 0;
 				fps = 0;
-				System.out.println(Runtime.getRuntime().freeMemory());
+				if (Reference.DEBUG_MODE) {
+					long freeBefore = Runtime.getRuntime().freeMemory();
+					System.out.println(freeBefore + "B");
+					System.out.println((freeBefore / 1024 / 1024) + "MB");
+				}
 				System.gc();
-				System.out.println(Runtime.getRuntime().freeMemory());
+				if (Reference.DEBUG_MODE) {
+					long freeAfter = Runtime.getRuntime().freeMemory();
+					System.out.println(freeAfter + "B");
+					System.out.println((freeAfter / 1024 / 1024) + "MB");
+				}
 			}
 		}
 	}
-
-	public enum EnumRenderState {
-		NORMAL_MAP,
-		CONSOLE,
-		BATTLE, 
-		BAG;
+	
+	private void updateGui(double deltaTime) {
+		IGuiOverlay overlayToRemove = null;
+		boolean shouldRemove = false;
+		for (IGuiOverlay overlay : guiElements) {
+			overlay.updateUpdateableGraphicsElements(deltaTime);
+			if (overlay.removeGui()) {
+				shouldRemove = true;
+				overlayToRemove = overlay;
+			}
+		}
+		if (shouldRemove) {
+			this.removeIGuiOverlay(overlayToRemove);
+		}
 	}
 	
-	private void drawMap() {
+	private void renderGui(Graphics g, ImageObserver observer) {
+		for (IGuiOverlay overlay : guiElements) {
+			overlay.drawGuiBackground(g, observer);
+			overlay.drawUpdateableGraphicsElements(g, observer);
+		}
+	}
+	
+	private void updateNormal(double deltaTime) {
+		for(GameObject gameObject: updateableAndDrawable) {
+			gameObject.update(deltaTime);
+		}
 		
+		for(IUpdateable upject : updateable) {
+			upject.update(deltaTime);
+		}
+	}
+	
+	private void renderNormal(Graphics g, ImageObserver observer) {
+		this.g2.setColor(Color.BLACK);
+		this.g2.fillRect(0, 0, Screen.TILE_POS_WIDTH * 11, Screen.TILE_POS_HEIGHT * 11);
+		this.g2.drawImage(Reference.Maps.LARGE_MAP, 0, 0, this.frame);
+//		this.g2.drawImage(Reference.Maps.LARGE_MAP, 0, 0, this.frame); TODO break the map into smaller sections
+
+		for (GameObject gameObject : updateableAndDrawable) {
+			gameObject.draw(g2, observer);
+		}
+		
+		for (IDrawable staject : drawable) {
+			staject.draw(g, observer);
+		}
+		
+		for (IGuiOverlay gui : guiElements) {
+			gui.hashCode(); // TODO ?
+		}
+		
+		this.g2.setColor(Color.GREEN);
+		this.g2.setFont(Reference.DEBUG_TEXT_FONT);
+		this.g2.drawString(stats, 25, 60);
+		
+		g.drawImage(this.i, 0, 0, this.frame);
 	}
 	
 	public JFrame getFrame() {
@@ -226,11 +295,40 @@ public class GameEngine {
 		return this.state;
 	}
 	
+	public IGuiOverlay getOpenGui() {
+		return openGui;
+	}
+	
+	public void addIGuiOverlay(IGuiOverlay overlay) {
+		guiElements.add(overlay);
+		this.openGui = overlay;
+		this.state = EnumRenderState.GUI_OVERLAY;
+	}
+	
+	private void removeIGuiOverlay(IGuiOverlay overlay) {
+		// TODO think about how to deal with GUI's that have sub GUI's
+		if (this.openGui == overlay) {
+			guiElements.remove(overlay);
+			this.openGui = null;
+			this.state = EnumRenderState.NORMAL_MAP;
+		}
+		
+	}
+	
 	public static GameEngine getInstance() {
 		return instance;
 	}
 	
 	public static boolean isRunning() {
 		return running;
+	}
+	
+	public enum EnumRenderState {
+		NORMAL_MAP,
+		/** Draws the stored Gui over its self, and doesnt draw the map */
+		GUI_OVERLAY,
+		CONSOLE,
+		BATTLE, 
+		BAG;
 	}
 }

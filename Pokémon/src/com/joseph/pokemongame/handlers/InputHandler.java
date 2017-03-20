@@ -6,6 +6,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import com.joseph.pokemongame.engine.GameEngine;
+import com.joseph.pokemongame.engine.GameEngine.EnumRenderState;
+import com.joseph.pokemongame.gui.TemporaryDialogueBoxOverlay;
+
 public class InputHandler {
 
 	/**
@@ -24,6 +28,18 @@ public class InputHandler {
 
 			public void keyPressed(KeyEvent e) {
 				keys[e.getKeyCode()] = true;
+				if (e.getKeyCode() == KeyEvent.VK_E) {
+					GameEngine.getInstance().addIGuiOverlay(new TemporaryDialogueBoxOverlay("This is a test of the emergency broad cast system."));
+					return;
+				}
+				if (GameEngine.getInstance().getState() == EnumRenderState.GUI_OVERLAY && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					GameEngine.getInstance().getOpenGui().setGuiToRemove();
+					return;
+				}
+				if (GameEngine.getInstance().getState() == EnumRenderState.NORMAL_MAP && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					// TODO will be adding the main ingame menu IGuiOverlay to the engine, but for now its System.exit(0);
+					System.exit(0);
+				}
 			}
 
 			public void keyReleased(KeyEvent e) {
