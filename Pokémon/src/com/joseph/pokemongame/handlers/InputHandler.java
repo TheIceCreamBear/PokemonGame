@@ -8,7 +8,8 @@ import java.awt.event.MouseListener;
 
 import com.joseph.pokemongame.engine.GameEngine;
 import com.joseph.pokemongame.engine.GameEngine.EnumRenderState;
-import com.joseph.pokemongame.gui.TemporaryDialogueBoxOverlay;
+import com.joseph.pokemongame.gui.DialogueBoxOverlay;
+import com.joseph.pokemongame.reference.Reference;
 
 public class InputHandler {
 
@@ -28,8 +29,8 @@ public class InputHandler {
 
 			public void keyPressed(KeyEvent e) {
 				keys[e.getKeyCode()] = true;
-				if (e.getKeyCode() == KeyEvent.VK_E) {
-					GameEngine.getInstance().addIGuiOverlay(new TemporaryDialogueBoxOverlay("This is a test of the emergency broad cast system."));
+				if (GameEngine.getInstance().getState() == EnumRenderState.NORMAL_MAP && e.getKeyCode() == KeyEvent.VK_E) {
+					GameEngine.getInstance().addIGuiOverlay(new DialogueBoxOverlay("This is a test of the emergency broad cast system.", Reference.GuiBackgroundRef._32X6GENERIC_BACK));
 					return;
 				}
 				if (GameEngine.getInstance().getState() == EnumRenderState.GUI_OVERLAY && e.getKeyCode() == KeyEvent.VK_ESCAPE) {

@@ -11,13 +11,15 @@ import javax.swing.JOptionPane;
 
 import com.joseph.pokemongame.gameobject.GameObject;
 import com.joseph.pokemongame.gameobject.locks.RenderLockObject;
+import com.joseph.pokemongame.gui.ConsoleGuiOverlay;
 import com.joseph.pokemongame.gui.IGuiOverlay;
+import com.joseph.pokemongame.handlers.GKELAH;
 import com.joseph.pokemongame.interfaces.IDrawable;
 import com.joseph.pokemongame.interfaces.IUpdateable;
 import com.joseph.pokemongame.item.Item;
+import com.joseph.pokemongame.player.Player;
 import com.joseph.pokemongame.player.TilePosition;
 import com.joseph.pokemongame.reference.Reference;
-import com.joseph.pokemongame.player.Player;
 import com.joseph.pokemongame.screen.Screen;
 import com.joseph.pokemongame.threads.RenderThread;
 import com.joseph.pokemongame.threads.ShutdownThread;
@@ -40,6 +42,7 @@ public class GameEngine {
 	private Graphics g2;
 	private BufferedImage i;
 	private Player p1;
+	private GKELAH gkelah;
 	
 	private ShutdownThread sDownThread;
 	private RenderThread renderThread;
@@ -52,6 +55,8 @@ public class GameEngine {
 	private static ArrayList<IUpdateable> updateable = new ArrayList<IUpdateable>();
 	private static ArrayList<IDrawable> drawable = new ArrayList<IDrawable>();
 	private static ArrayList<IGuiOverlay> guiElements = new ArrayList<IGuiOverlay>();
+	
+	public static boolean console = false;
 	
 	/**
 	 * @param args
@@ -93,9 +98,12 @@ public class GameEngine {
 
 		this.state = EnumRenderState.NORMAL_MAP;
 		
+		this.gkelah = new GKELAH();
+		
 		this.frame = new JFrame("Pokemon Remastered (PC indev)");
 		this.frame.setBounds(0, 0, Screen.TILE_POS_WIDTH * 11, Screen.TILE_POS_HEIGHT * 11);
 		this.frame.setVisible(true);
+		this.frame.addKeyListener(gkelah);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// TODO
@@ -114,8 +122,6 @@ public class GameEngine {
 				break;
 			case BATTLE:
 				break;
-			case CONSOLE:
-				break;
 			case GUI_OVERLAY:
 				updateGui(deltaTime);
 				break;
@@ -132,8 +138,6 @@ public class GameEngine {
 			case BAG:
 				break;
 			case BATTLE:
-				break;
-			case CONSOLE:
 				break;
 			case GUI_OVERLAY:
 				renderGui(g, observer);
@@ -300,6 +304,9 @@ public class GameEngine {
 	}
 	
 	public void addIGuiOverlay(IGuiOverlay overlay) {
+		if (overlay instanceof ConsoleGuiOverlay) {
+			console = true;
+		}
 		guiElements.add(overlay);
 		this.openGui = overlay;
 		this.state = EnumRenderState.GUI_OVERLAY;
@@ -327,7 +334,6 @@ public class GameEngine {
 		NORMAL_MAP,
 		/** Draws the stored Gui over its self, and doesnt draw the map */
 		GUI_OVERLAY,
-		CONSOLE,
 		BATTLE, 
 		BAG;
 	}
