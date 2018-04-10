@@ -9,7 +9,7 @@ import com.joseph.pokemongame.reference.Reference;
 
 /**
  * GKELAH, or GlobalKeyEventHandlerAndListener, is a key event handler that listens for all
- * key events and does a specific action based on the state of the engine and 
+ * key events and does a specific action based on the state of the engine and the key pressed
  * @author Joseph
  */
 public class GKELAH implements KeyListener {

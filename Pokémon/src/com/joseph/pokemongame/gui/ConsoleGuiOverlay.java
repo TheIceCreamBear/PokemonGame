@@ -13,7 +13,6 @@ import com.joseph.pokemongame.engine.GameEngine;
 import com.joseph.pokemongame.reference.Reference;
 
 public class ConsoleGuiOverlay implements IGuiOverlay {
-	private ArrayList<Character> toAdd;
 	private BufferedImage back;
 	private FontRenderContext frc;
 	private String command;
@@ -26,7 +25,6 @@ public class ConsoleGuiOverlay implements IGuiOverlay {
 	private static ConsoleGuiOverlay instance;
 	
 	public ConsoleGuiOverlay(BufferedImage back) {
-		this.toAdd = new ArrayList<Character>();
 		this.back = back;
 		this.command = "";
 		Graphics2D g2d = (Graphics2D) GameEngine.getInstance().getG();
@@ -84,10 +82,10 @@ public class ConsoleGuiOverlay implements IGuiOverlay {
 	public void notifyInstanceOfKeyTyped(KeyEvent event) {
 		if (event.getID() == KeyEvent.KEY_TYPED) {
 			char temp = event.getKeyChar();
-			if ((int) temp == 27) {
+			if ((int) temp == 27) { // escape
 				return;
 			}
-			if ((int) temp == 8) {
+			if ((int) temp == 8) { // BackSpace
 				if (command.length() == 1) {
 					return;
 				}
